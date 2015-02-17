@@ -1,8 +1,10 @@
 {
   "name": "service-template-node",
   "version": "0.0.0",
-  "description": "REST storage and service dispatcher",
-  "scripts": {},
+  "description": "Wikimedia node service template",
+  "scripts": {
+      "start": "service-runner"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/wikimedia/service-template-node.git"
@@ -23,7 +25,7 @@
     "bluebird": "^2.9.9",
     "express": "^4.11.2",
     "js-yaml": "^3.2.6",
-    "servisor": "git+https://github.com/wikimedia/servisor#master"
+    "service-runner": "0.0.1"
   },
   "devDependencies": {}
 }
