@@ -15,7 +15,7 @@ class ScriptData
 
   include ERB::Util
 
-  @@suffix = {'systemd' => '.service', 'upstart' => '.conf'}
+  @@suffix = {'systemd' => '.service'}
   
   def initialize input_dir
     @template = {}
