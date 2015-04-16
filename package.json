@@ -46,5 +46,11 @@
     "mocha": "^2.2.1",
     "mocha-jshint": "0.0.9",
     "mocha-lcov-reporter": "0.0.1"
+  },
+  "deploy": {
+    "target": "ubuntu",
+    "dependencies": {
+      "_all": []
+    }
   }
 }
