@@ -204,8 +204,6 @@ function update_deploy() {
         });
     }
 
-    opts.need_build = false;
-
     // check if there is an alternative repo name defined
     return promised_git(['config', 'deploy.name'])
     .then(function(name) {
@@ -213,6 +211,8 @@ function update_deploy() {
         // we need to CHDIR into the deploy dir for subsequent operations
         process.chdir(opts.dir);
         return chained_pgit([
+            // make sure we are on master
+            ['checkout', 'master'],
             // fetch any possible updates
             ['fetch', 'origin'],
             // work on a topic branch
@@ -246,7 +246,7 @@ function update_deploy() {
                     // get a nice list of commits included in the change
                     return promised_git(['log', '..origin/master', '--oneline', '--no-merges', '--reverse', '--color=never']);
                 }).then(function(logs) {
-                    if(!logs) {
+                    if(!logs && !opts.need_build) {
                         // no updates have happened, nothing to do here any more but clean up
                         // go back to the root dir
                         process.chdir(opts.dir);
@@ -256,8 +256,10 @@ function update_deploy() {
                             console.log('The deploy repository is up to date already, exiting.');
                             process.exit(0);
                         });
+                    } else if(logs) {
+                        logs += "\n";
                     }
-                    opts.commit_msg += "List of changes:\n" + logs + "\n";
+                    opts.commit_msg += "List of changes:\n" + logs;
                     return promised_git(['checkout', 'origin/master']);
                 }).then(function() {
                     // go back to the root dir
@@ -282,6 +284,10 @@ function update_deploy() {
     }).then(function() {
         if(!opts.need_build) {
             return;
+        }
+        // update the commit message
+        if(!/^initial/i.test(opts.commit_msg)) {
+            opts.commit_msg += "xxxxxxx Update node module dependencies\n";
         }
         // a rebuild is needed, start by removing the existing modules
         return promised_git(['rm', '-r', 'node_modules'])
@@ -394,7 +400,8 @@ if(module.parent === null) {
         tests: false,
         coverage: false,
         deploy: false,
-        verbose: false
+        verbose: false,
+        need_build: false
     };
 
     // check for command-line args
@@ -410,6 +417,9 @@ if(module.parent === null) {
             case '--cover':
                 opts.coverage = true;
                 break;
+            case '-b':
+            case '--build-deploy':
+                opts.need_build = true;
             case '-d':
             case '--update-deploy':
                 opts.deploy = true;
@@ -426,6 +436,7 @@ if(module.parent === null) {
                 console.log('  -t, --test           instead of starting the service, run the tests');
                 console.log('  -c, --cover          run the tests and report the coverage info');
                 console.log('  -d, --update-deploy  update the deploy repo');
+                console.log('  -b, --build-deploy   update the deploy repo and force module rebuild');
                 console.log('  -v, --verbose        output the commands being run');
                 process.exit(/^-(h|-help)/.test(arg) ? 0 : 1);
         }
