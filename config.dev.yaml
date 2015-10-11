@@ -47,3 +47,10 @@ services:
       # no_proxy_list:
       #   - domain1.com
       #   - domain2.org
+      # the list of incoming request headers that should not be logged; if
+      # left empty, cookie, set-cookie, x-forwarded-for and x-client-ip are
+      # removed by default
+      # log_header_blacklist:
+      #   - set-cookie
+      #   - x-my-header
+      #   - x-your-header
