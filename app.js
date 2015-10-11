@@ -54,13 +54,13 @@ function initApp(options) {
 
     // set up header blacklisting for logging
     if(!app.conf.log_header_blacklist) {
-        app.conf.log_header_blacklist = ['set-cookie', 'x-client-ip', 'x-forwarded-for'];
+        app.conf.log_header_blacklist = ['cookie', 'set-cookie', 'x-client-ip', 'x-forwarded-for'];
     } else if(typeof app.conf.log_header_blacklist === 'string') {
         app.conf.log_header_blacklist = app.conf.log_header_blacklist.split(/,/);
     }
-    app.conf.log_header_blacklist = new RegExp(app.conf.log_header_blacklist.map(function(item) {
+    app.conf.log_header_blacklist = new RegExp('^' + app.conf.log_header_blacklist.map(function(item) {
         return item.trim();
-    }).join('|'), 'i');
+    }).join('|') + '$', 'i');
 
     // set up the spec
     if(!app.conf.spec) {
