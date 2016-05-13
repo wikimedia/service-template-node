@@ -109,6 +109,9 @@ function initApp(options) {
         next();
     });
 
+    // set up the user agent header string to use for requests
+    app.conf.user_agent = app.conf.user_agent || app.info.name;
+
     // disable the X-Powered-By header
     app.set('x-powered-by', false);
     // disable the ETag header - users should provide them!
