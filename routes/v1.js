@@ -94,7 +94,7 @@ router.get('/siteinfo/:prop?', function(req, res) {
 function getBody(domain, title) {
 
     // get the page
-    return apiUtil.restApiGet(app, domain, 'page/html/' + title/*, {method: 'post'}*/)
+    return apiUtil.restApiGet(app, domain, 'page/html/' + title)
     .then(function(callRes) {
         // and then load and parse the page
         return BBPromise.resolve(domino.createDocument(callRes.body));
