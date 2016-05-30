@@ -84,7 +84,7 @@ router.get('/siteinfo/:prop?', function(req, res) {
  ****************************/
 
 /**
- * A helper function that obtains the HTML for a given title and
+ * A helper function that obtains the Parsoid HTML for a given title and
  * loads it into a domino DOM document instance.
  *
  * @param {String} domain the domain to contact
@@ -94,12 +94,8 @@ router.get('/siteinfo/:prop?', function(req, res) {
 function getBody(domain, title) {
 
     // get the page
-    return preq.get({
-        uri: 'http://' + domain + '/w/index.php',
-        query: {
-            title: title
-        }
-    }).then(function(callRes) {
+    return apiUtil.restApiGet(app, domain, 'page/html/' + title/*, {method: 'post'}*/)
+    .then(function(callRes) {
         // and then load and parse the page
         return BBPromise.resolve(domino.createDocument(callRes.body));
     });
@@ -135,7 +131,7 @@ router.get('/page/:title/lead', function(req, res) {
     .then(function(doc) {
         var leadSec = '';
         // find all paragraphs directly under the content div
-        var ps = doc.querySelectorAll('#mw-content-text > p') || [];
+        var ps = doc.querySelectorAll('p') || [];
         for(var idx = 0; idx < ps.length; idx++) {
             var child = ps[idx];
             // find the first paragraph that is not empty
