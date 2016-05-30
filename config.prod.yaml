@@ -72,7 +72,7 @@ services:
       # the template used for contacting RESTBase
       restbase_req:
         method: '{{request.method}}'
-        uri: http://restbase.svc.eqiad.wmnet/{domain}/v1/{+path}
+        uri: http://restbase.svc.eqiad.wmnet/{{domain}}/v1/{+path}
         query: '{{ default(request.query, {}) }}'
         headers: '{{request.headers}}'
         body: '{{request.body}}'
