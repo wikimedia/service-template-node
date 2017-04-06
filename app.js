@@ -18,7 +18,7 @@ var yaml = require('js-yaml');
  * @param {Object} options the options to initialise the app with
  * @return {bluebird} the promise resolving to the app object
  */
-function initApp(options) {
+const initApp = BBPromise.method(options => {
 
     // the main application object
     var app = express();
@@ -127,9 +127,9 @@ function initApp(options) {
     // use the application/x-www-form-urlencoded parser
     app.use(bodyParser.urlencoded({extended: true}));
 
-    return BBPromise.resolve(app);
+    return app;
 
-}
+});
 
 
 /**
@@ -141,7 +141,7 @@ function loadRoutes (app) {
 
     // get the list of files in routes/
     return fs.readdirAsync(__dirname + '/routes').map(function(fname) {
-        return BBPromise.try(function() {
+        return BBPromise.try(() => {
             // ... and then load each route
             // but only if it's a js file
             if(!/\.js$/.test(fname)) {
@@ -150,7 +150,8 @@ function loadRoutes (app) {
             // import the route file
             var route = require(__dirname + '/routes/' + fname);
             return route(app);
-        }).then(function(route) {
+        })
+        .then(route => {
             if(route === undefined) {
                 return undefined;
             }
@@ -173,11 +174,12 @@ function loadRoutes (app) {
             // all good, use that route
             app.use(route.path, route.router);
         });
-    }).then(function () {
+    })
+    .then(() => {
         // catch errors
         sUtil.setErrorHandler(app);
         // route loading is now complete, return the app object
-        return BBPromise.resolve(app);
+        return app;
     });
 
 }
@@ -194,20 +196,21 @@ function createServer(app) {
     // attaches the app to it, and starts accepting
     // incoming client requests
     var server;
-    return new BBPromise(function (resolve) {
+    return new BBPromise(resolve => {
         server = http.createServer(app).listen(
             app.conf.port,
             app.conf.interface,
             resolve
         );
-    }).then(function () {
+    })
+    .then(() => {
         app.logger.log('info',
             'Worker ' + process.pid + ' listening on ' + (app.conf.interface || '*') + ':' + app.conf.port);
 
         // Don't delay incomplete packets for 40ms (Linux default) on
         // pipelined HTTP sockets. We write in large chunks or buffers, so
         // lack of coalescing should not be an issue here.
-        server.on("connection", function(socket) {
+        server.on("connection", socket => {
             socket.setNoDelay(true);
         });
 
@@ -227,7 +230,7 @@ module.exports = function(options) {
 
     return initApp(options)
     .then(loadRoutes)
-    .then(function(app) {
+    .then(app => {
         // serve static files from static/
         app.use('/static', express.static(__dirname + '/static'));
         return app;
