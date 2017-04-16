@@ -16,7 +16,7 @@ Install the dependencies
 
 ```
 cd service-template-node
-npm install
+sudo npm install
 ```
 
 You are now ready to get to work!
