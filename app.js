@@ -95,7 +95,7 @@ function initApp(options) {
     }
 
     // set the CORS and CSP headers
-    app.all('*', function(req, res, next) {
+    app.use((req, res, next) => {
         if(app.conf.cors !== false) {
             res.header('access-control-allow-origin', app.conf.cors);
             res.header('access-control-allow-headers', 'accept, x-requested-with, content-type');
@@ -109,12 +109,14 @@ function initApp(options) {
             res.header('x-content-security-policy', app.conf.csp);
             res.header('x-webkit-csp', app.conf.csp);
         }
-        sUtil.initAndLogRequest(req, app);
         next();
     });
 
     // set up the user agent header string to use for requests
     app.conf.user_agent = app.conf.user_agent || app.info.name;
+
+    // set up the logger for one request
+    app.use(sUtil.initAndLogRequest);
 
     // disable the X-Powered-By header
     app.set('x-powered-by', false);
@@ -175,7 +177,7 @@ function loadRoutes (app) {
         });
     }).then(function () {
         // catch errors
-        sUtil.setErrorHandler(app);
+        app.use(sUtil.errorHandler);
         // route loading is now complete, return the app object
         return BBPromise.resolve(app);
     });
@@ -234,4 +236,3 @@ module.exports = function(options) {
     }).then(createServer);
 
 };
-
