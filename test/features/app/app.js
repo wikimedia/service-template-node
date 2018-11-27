@@ -69,7 +69,8 @@ describe('express app', function() {
         }).then((res) => {
             assert.deepEqual(res.status, 200);
             // if there is no content-length, the reponse was gzipped
-            assert.deepEqual(res.headers['content-length'], undefined, 'Did not expect the content-length header!');
+            assert.deepEqual(res.headers['content-length'], undefined,
+                'Did not expect the content-length header!');
         });
     });
 
