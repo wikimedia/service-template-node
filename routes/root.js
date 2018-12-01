@@ -24,7 +24,7 @@ router.get('/robots.txt', (req, res) => {
 
     res.set({
         'User-agent': '*',
-        'Disallow': '/'
+        Disallow: '/'
     }).end();
 
 });
