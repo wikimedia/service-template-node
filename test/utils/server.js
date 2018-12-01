@@ -31,7 +31,9 @@ config.conf.logging = {
 // make a deep copy of it for later reference
 const origConfig = extend(true, {}, config);
 
-module.exports.stop = () => { return BBPromise.resolve(); };
+module.exports.stop = () => {
+	return BBPromise.resolve();
+};
 let options = null;
 const runner = new ServiceRunner();
 

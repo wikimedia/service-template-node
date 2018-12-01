@@ -8,7 +8,6 @@ rules: {
     'computed-property-spacing': 0,
     'indent': 0,
     'key-spacing': 0,
-    'max-statements-per-line': 0,
     'no-multi-spaces': 0,
     'no-multiple-empty-lines': 0,
     'no-underscore-dangle': 0,
