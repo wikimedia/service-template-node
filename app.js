@@ -30,10 +30,11 @@ function initApp(options) {
     app.info = packageInfo;         // this app's package info
 
     // ensure some sane defaults
-    if (!app.conf.port) { app.conf.port = 8888; } // eslint-disable-line max-statements-per-line
-    if (!app.conf.interface) { app.conf.interface = '0.0.0.0'; } // eslint-disable-line max-statements-per-line
-    if (app.conf.compression_level === undefined) { app.conf.compression_level = 3; }  // eslint-disable-line max-len,max-statements-per-line
-    if (app.conf.cors === undefined) { app.conf.cors = '*'; } // eslint-disable-line max-statements-per-line
+    app.conf.port = app.conf.port || 8888;
+    app.conf.interface = app.conf.interface || '0.0.0.0';
+    // eslint-disable-next-line max-len
+    app.conf.compression_level = app.conf.compression_level === undefined ? 3 : app.conf.compression_level;
+    app.conf.cors = app.conf.cors === undefined ? '*' : app.conf.cors;
     if (app.conf.csp === undefined) {
         // eslint-disable-next-line max-len
         app.conf.csp = "default-src 'self'; object-src 'none'; media-src *; img-src *; style-src *; frame-ancestors 'self'";
