@@ -227,7 +227,7 @@ function createServer(app) {
  * @param {Object} options the options to initialise the app with
  * @return {bluebird} HTTP server
  */
-module.exports = function (options) {
+module.exports = (options) => {
 
     return initApp(options)
     .then((app) => loadRoutes(app, `${__dirname}/routes`))
