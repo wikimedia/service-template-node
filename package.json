@@ -5,8 +5,8 @@
   "main": "./app.js",
   "scripts": {
     "start": "service-runner",
-    "test": "PREQ_CONNECT_TIMEOUT=15 mocha && npm run lint",
-    "lint": "eslint --cache --max-warnings 0 --ext .js --ext .json .",
+    "test": "PREQ_CONNECT_TIMEOUT=15 npm run lint && mocha",
+    "lint": "eslint --max-warnings 0 --ext .js --ext .json .",
     "docker-start": "service-runner docker-start",
     "docker-test": "service-runner docker-test",
     "test-build": "service-runner docker-test && service-runner build --deploy-repo --force",
@@ -46,10 +46,8 @@
   },
   "devDependencies": {
     "ajv": "^6.5.4",
-    "eslint": "^5.9.0",
-    "eslint-config-node-services": "^2.2.5",
-    "eslint-config-wikimedia": "^0.8.1",
-    "eslint-plugin-jsdoc": "^3.9.1",
+    "eslint-config-wikimedia": "^0.10.0",
+    "eslint-plugin-jsdoc": "^4.0.1",
     "eslint-plugin-json": "^1.2.1",
     "extend": "^3.0.2",
     "istanbul": "^0.4.5",
