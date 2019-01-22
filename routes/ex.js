@@ -1,13 +1,11 @@
 'use strict';
 
-
 const BBPromise = require('bluebird');
 const sUtil = require('../lib/util');
 const fs = BBPromise.promisifyAll(require('fs'));
 
 // shortcut
 const HTTPError = sUtil.HTTPError;
-
 
 /**
  * The main router object
@@ -17,7 +15,6 @@ const router = sUtil.router();
 /*
  *  ERROR EXAMPLES
  */
-
 
 /**
  * GET /err/array
@@ -32,7 +29,6 @@ router.get('/err/array', (req, res) => {
     res.send(arr.join());
 
 });
-
 
 /**
  * GET /err/file
@@ -54,7 +50,6 @@ router.get('/err/file', (req, res) => {
 
 });
 
-
 /**
  * GET /err/manual/error
  * Throws a generic error manually
@@ -68,7 +63,6 @@ router.get('/err/manual/error', (req, res) => {
     }
 
 });
-
 
 /**
  * GET /err/manual/deny
@@ -85,7 +79,6 @@ router.get('/err/manual/deny', (req, res) => {
     });
 
 });
-
 
 /**
  * GET /err/manual/auth
@@ -110,7 +103,6 @@ router.get('/err/manual/auth', (req, res) => {
 
 });
 
-
 module.exports = (appObj) => {
 
     return {
@@ -120,4 +112,3 @@ module.exports = (appObj) => {
     };
 
 };
-

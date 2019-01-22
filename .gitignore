@@ -1,6 +1,10 @@
 Dockerfile
 .idea/
+.vscode/
+
 coverage
 config.yaml
 node_modules
 npm-debug.log
+
+.eslintcache

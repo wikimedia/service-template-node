@@ -1,6 +1,5 @@
 'use strict';
 
-
 const BBPromise = require('bluebird');
 const domino = require('domino');
 const sUtil = require('../lib/util');
@@ -8,7 +7,6 @@ const apiUtil = require('../lib/api-util');
 
 // shortcut
 const HTTPError = sUtil.HTTPError;
-
 
 /**
  * The main router object
@@ -19,7 +17,6 @@ const router = sUtil.router();
  * The main application object reported when this module is require()d
  */
 let app;
-
 
 /**
  * GET /siteinfo{/prop}
@@ -75,7 +72,6 @@ router.get('/siteinfo/:prop?', (req, res) => {
 
 });
 
-
 /*
  *  PAGE MASSAGING SECTION
  */
@@ -98,7 +94,6 @@ function getBody(domain, title) {
 
 }
 
-
 /**
  * GET /page/{title}
  * Gets the body of a given page.
@@ -113,7 +108,6 @@ router.get('/page/:title', (req, res) => {
     });
 
 });
-
 
 /**
  * GET /page/{title}/lead
@@ -143,7 +137,6 @@ router.get('/page/:title/lead', (req, res) => {
 
 });
 
-
 module.exports = (appObj) => {
 
     app = appObj;
@@ -155,4 +148,3 @@ module.exports = (appObj) => {
     };
 
 };
-
