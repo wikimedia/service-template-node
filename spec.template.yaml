@@ -49,9 +49,6 @@ paths:
           request: {}
           response:
             status: 200
-            headers:
-              user-agent: '*'
-              disallow: '/'
   /:
     get:
       tags:
