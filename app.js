@@ -80,7 +80,8 @@ function initApp(options) {
             app.conf.spec = {};
         }
     }
-    if (!app.conf.spec.swagger) {
+    if (!app.conf.spec.swagger && !app.conf.spec.openapi) {
+        // Set default to swagger 2.0 for backwards compability
         app.conf.spec.swagger = '2.0';
     }
     if (!app.conf.spec.info) {

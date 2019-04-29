@@ -42,7 +42,7 @@
     "preq": "^0.5.6",
     "service-runner": "^2.6.4",
     "swagger-router": "^0.7.2",
-    "swagger-ui": "git+https://github.com/wikimedia/swagger-ui#master"
+    "swagger-ui-dist": "^3.22.1"
   },
   "devDependencies": {
     "ajv": "^6.5.4",
