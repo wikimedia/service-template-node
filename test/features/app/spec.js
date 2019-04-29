@@ -255,15 +255,10 @@ describe('Swagger spec', function() {
         if (spec['x-default-params']) {
             defParams = spec['x-default-params'];
         }
-        const specType = ['openapi', 'swagger'].filter((prop) => {
-            return !!spec[prop];
-        });
-        assert.deepEqual(!!Object.keys(specType), true, 'No spec type field present!');
         // check the high-level attributes
-        ['info', 'paths'].forEach((prop) => {
+        ['info', 'openapi', 'paths'].forEach((prop) => {
             assert.deepEqual(!!spec[prop], true, `No ${prop} field present!`);
         });
-
         // no paths - no love
         assert.deepEqual(!!Object.keys(spec.paths), true, 'No paths given in the spec!');
         // now check each path
