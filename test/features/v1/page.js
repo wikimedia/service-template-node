@@ -1,25 +1,24 @@
-/* global describe, it, before, after */
-
 'use strict';
-
 
 const preq   = require('preq');
 const assert = require('../../utils/assert.js');
-const server = require('../../utils/server.js');
+const Server = require('../../utils/server.js');
 
-if (!server.stopHookAdded) {
-    server.stopHookAdded = true;
+describe('page gets', function () {
+
+    this.timeout(20000);
+
+    let uri = null;
+    const server = new Server();
+
+    before(() => {
+        return server.start()
+        .then(() => {
+            uri = `${server.config.uri}en.wikipedia.org/v1/page/Table_(database)/`;
+        });
+    });
+
     after(() => server.stop());
-}
-
-describe('page gets', function() {
-
-    this.timeout(20000); // eslint-disable-line no-invalid-this
-
-    before(() => server.start());
-
-    // common URI prefix for the page
-    const uri = `${server.config.uri}en.wikipedia.org/v1/page/Table_(database)/`;
 
     it('should get the whole page body', () => {
         return preq.get({
@@ -71,4 +70,3 @@ describe('page gets', function() {
         });
     });
 });
-
