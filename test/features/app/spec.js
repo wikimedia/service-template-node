@@ -9,6 +9,8 @@ const server = require('../../utils/server.js');
 const URI    = require('swagger-router').URI;
 const yaml   = require('js-yaml');
 const fs     = require('fs');
+const OpenAPISchemaValidator = require('openapi-schema-validator').default;
+const validator = new OpenAPISchemaValidator({ version: 3 });
 
 if (!server.stopHookAdded) {
     server.stopHookAdded = true;
@@ -248,6 +250,13 @@ describe('Swagger spec', function() {
             assert.contentType(res, 'application/json');
             assert.notDeepEqual(res.body, undefined, 'No body received!');
             spec = res.body;
+        });
+    });
+
+    it('should expose valid OpenAPI spec', () => {
+        return preq.get({ uri: `${server.config.uri}?spec` })
+        .then((res) =>  {
+            assert.deepEqual({errors: []}, validator.validate(res.body), 'Spec must have no validation errors');
         });
     });
 
