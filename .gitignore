@@ -3,6 +3,7 @@ Dockerfile
 .vscode/
 
 coverage
+.nyc_output
 config.yaml
 node_modules
 npm-debug.log
