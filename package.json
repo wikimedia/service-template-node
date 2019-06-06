@@ -10,7 +10,7 @@
     "docker-start": "service-runner docker-start",
     "docker-test": "service-runner docker-test",
     "test-build": "service-runner docker-test && service-runner build --deploy-repo --force",
-    "coverage": "nyc --reporter=lcov _mocha"
+    "coverage": "PREQ_CONNECT_TIMEOUT=15 nyc --reporter=lcov _mocha"
   },
   "repository": {
     "type": "git",
@@ -33,7 +33,6 @@
     "bluebird": "^3.5.2",
     "body-parser": "^1.18.3",
     "bunyan": "^1.8.12",
-    "cassandra-uuid": "^0.1.0",
     "compression": "^1.7.3",
     "domino": "^2.1.0",
     "express": "^4.16.4",
@@ -42,7 +41,8 @@
     "preq": "^0.5.6",
     "service-runner": "^2.6.4",
     "swagger-router": "^0.7.2",
-    "swagger-ui-dist": "^3.22.1"
+    "swagger-ui-dist": "^3.22.1",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "ajv": "^6.5.4",
