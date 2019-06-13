@@ -14,11 +14,6 @@ const HTTPError = sUtil.HTTPError;
 const router = sUtil.router();
 
 /**
- * The main application object reported when this module is require()d
- */
-let app;
-
-/**
  * GET /siteinfo{/prop}
  * Fetches site info for the given domain, optionally
  * returning only the specified property. This example shows how to:
@@ -44,7 +39,7 @@ router.get('/siteinfo/:prop?', (req, res) => {
     };
 
     // send it
-    return apiUtil.mwApiGet(app, req.params.domain, apiQuery)
+    return apiUtil.mwApiGet(req, apiQuery)
     // and then return the result to the caller
     .then((apiRes) => {
         // do we have to return only one prop?
@@ -79,14 +74,13 @@ router.get('/siteinfo/:prop?', (req, res) => {
 /**
  * A helper function that obtains the Parsoid HTML for a given title and
  * loads it into a domino DOM document instance.
- * @param {string} domain the domain to contact
- * @param {string} title the title of the page to get
+ * @param {!Object} req the incoming request
  * @return {Promise} a promise resolving as the HTML element object
  */
-function getBody(domain, title) {
+function getBody(req) {
 
     // get the page
-    return apiUtil.restApiGet(app, domain, `page/html/${title}`)
+    return apiUtil.restApiGet(req, `page/html/${req.params.title}`)
     .then((callRes) => {
         // and then load and parse the page
         return BBPromise.resolve(domino.createDocument(callRes.body));
@@ -101,7 +95,7 @@ function getBody(domain, title) {
 router.get('/page/:title', (req, res) => {
 
     // get the page's HTML directly
-    return getBody(req.params.domain, req.params.title)
+    return getBody(req)
     // and then return it
     .then((doc) => {
         res.status(200).type('html').end(doc.body.innerHTML);
@@ -116,7 +110,7 @@ router.get('/page/:title', (req, res) => {
 router.get('/page/:title/lead', (req, res) => {
 
     // get the page's HTML directly
-    return getBody(req.params.domain, req.params.title)
+    return getBody(req)
     // and then find the leading section and return it
     .then((doc) => {
         let leadSec = '';
@@ -138,8 +132,6 @@ router.get('/page/:title/lead', (req, res) => {
 });
 
 module.exports = (appObj) => {
-
-    app = appObj;
 
     return {
         path: '/',

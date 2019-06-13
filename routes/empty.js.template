@@ -2,7 +2,6 @@
 
 
 var BBPromise = require('bluebird');
-var preq = require('preq');
 var sUtil = require('../lib/util');
 
 // shortcut

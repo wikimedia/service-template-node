@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 0.6.0
+  version: 0.7.0
   title: WMF Node.JS Service Template
   description: A template for creating Node.JS services
   termsOfService: https://wikimediafoundation.org/wiki/Terms_of_Use
@@ -426,6 +426,20 @@ paths:
             status: 401
             headers:
               content-type: application/json
+  /ex/req/uri/{uri}:
+    get:
+      tags:
+        - Example
+        - Request issuing
+      description: Issues a request to the given URI
+      responses:
+        200:
+          description: OK
+      x-amples:
+        - title: Get example home page
+          request:
+            params:
+              uri: 'http://www.example.com'
 
 components:
   schemas:
