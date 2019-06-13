@@ -103,6 +103,23 @@ router.get('/err/manual/auth', (req, res) => {
 
 });
 
+/*
+ *  REQUEST EXAMPLES
+ */
+
+/**
+ * GET /req/uri
+ */
+router.get('/req/uri/:uri', (req, res) => {
+    // to issue an external request, use req.issueRequest
+    return req.issueRequest(req.params.uri)
+    .then((r) => {
+        res.status(r.status);
+        res.set(r.headers);
+        res.end(r.body);
+    });
+});
+
 module.exports = (appObj) => {
 
     return {
