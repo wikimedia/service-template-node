@@ -1,25 +1,24 @@
-/* global describe, it, before, after */
-
 'use strict';
-
 
 const preq   = require('preq');
 const assert = require('../../utils/assert.js');
-const server = require('../../utils/server.js');
+const Server = require('../../utils/server.js');
 
-if (!server.stopHookAdded) {
-    server.stopHookAdded = true;
+describe('wiki site info', function () {
+
+    this.timeout(20000);
+
+    let uri = null;
+    const server = new Server();
+
+    before(() => {
+        return server.start()
+        .then(() => {
+            uri =  `${server.config.uri}en.wikipedia.org/v1/siteinfo/`;
+        });
+    });
+
     after(() => server.stop());
-}
-
-describe('wiki site info', function() {
-
-    this.timeout(20000); // eslint-disable-line no-invalid-this
-
-    before(() => server.start());
-
-    // common URI prefix for v1
-    const uri = `${server.config.uri}en.wikipedia.org/v1/siteinfo/`;
 
     it('should get all general enwiki site info', () => {
         return preq.get({
@@ -73,4 +72,3 @@ describe('wiki site info', function() {
         });
     });
 });
-

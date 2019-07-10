@@ -1,25 +1,23 @@
-/* global describe, it, before, after */
-
 'use strict';
-
 
 const preq   = require('preq');
 const assert = require('../../utils/assert.js');
-const server = require('../../utils/server.js');
+const Server = require('../../utils/server.js');
 
-if (!server.stopHookAdded) {
-    server.stopHookAdded = true;
+describe('errors', function () {
+    this.timeout(20000);
+
+    let uri = null;
+    const server = new Server();
+
+    before(() => {
+        return server.start()
+        .then(() => {
+            uri = `${server.config.uri}ex/err/`;
+        });
+    });
+
     after(() => server.stop());
-}
-
-describe('errors', function() {
-
-    this.timeout(20000); // eslint-disable-line no-invalid-this
-
-    before(() => server.start());
-
-    // common URI prefix for the errors
-    const uri = `${server.config.uri}ex/err/`;
 
     it('array creation error', () => {
         return preq.get({
@@ -91,4 +89,3 @@ describe('errors', function() {
         });
     });
 });
-
