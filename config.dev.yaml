@@ -61,10 +61,9 @@ services:
       #   - x-request-id
       # the user agent to use when issuing requests
       # user_agent: service-template-node
-      # the template used for contacting the MW API
-      #
-      # # Max JSON POST body size limit.
+      # max JSON POST body size limit
       # max_body_size: 100kb
+      # the template used for contacting the MW API
       mwapi_req:
         method: post
         uri: https://{{domain}}/w/api.php
