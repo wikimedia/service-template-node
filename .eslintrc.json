@@ -1,5 +1,9 @@
 {
-  "extends": "eslint-config-wikimedia/server",
+  "extends": [
+    "wikimedia/server",
+    "wikimedia/node",
+    "wikimedia/language/es2016"
+  ],
   "plugins": ["json", "jsdoc"],
   "rules": {
     "camelcase": [
