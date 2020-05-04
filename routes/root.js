@@ -18,9 +18,7 @@ let app;
  * Instructs robots no indexing should occur on this domain.
  */
 router.get('/robots.txt', (req, res) => {
-
     res.type('text/plain').end('User-agent: *\nDisallow: /\n');
-
 });
 
 /**
@@ -29,7 +27,6 @@ router.get('/robots.txt', (req, res) => {
  * parameter is given, otherwise lets the next middleware handle it
  */
 router.get('/', (req, res, next) => {
-
     if ({}.hasOwnProperty.call(req.query || {}, 'spec')) {
         res.json(app.conf.spec);
     } else if ({}.hasOwnProperty.call(req.query || {}, 'doc')) {
@@ -37,11 +34,9 @@ router.get('/', (req, res, next) => {
     } else {
         next();
     }
-
 });
 
 module.exports = (appObj) => {
-
     app = appObj;
 
     return {
@@ -49,5 +44,4 @@ module.exports = (appObj) => {
         skip_domain: true,
         router
     };
-
 };

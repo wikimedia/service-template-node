@@ -31,7 +31,6 @@ const router = sUtil.router();
  *      the general siprop, as supported by MWAPI)
  */
 router.get('/siteinfo/:prop?', (req, res) => {
-
     // construct the query for the MW Action API
     const apiQuery = {
         action: 'query',
@@ -64,7 +63,6 @@ router.get('/siteinfo/:prop?', (req, res) => {
         // and return the whole response (contained in body.query.general)
         res.status(200).json(apiRes.body.query.general);
     });
-
 });
 
 /*
@@ -78,14 +76,12 @@ router.get('/siteinfo/:prop?', (req, res) => {
  * @return {Promise} a promise resolving as the HTML element object
  */
 function getBody(req) {
-
     // get the page
     return apiUtil.restApiGet(req, `page/html/${req.params.title}`)
     .then((callRes) => {
         // and then load and parse the page
         return BBPromise.resolve(domino.createDocument(callRes.body));
     });
-
 }
 
 /**
@@ -93,14 +89,12 @@ function getBody(req) {
  * Gets the body of a given page.
  */
 router.get('/page/:title', (req, res) => {
-
     // get the page's HTML directly
     return getBody(req)
     // and then return it
     .then((doc) => {
         res.status(200).type('html').end(doc.body.innerHTML);
     });
-
 });
 
 /**
@@ -108,7 +102,6 @@ router.get('/page/:title', (req, res) => {
  * Gets the leading section of a given page.
  */
 router.get('/page/:title/lead', (req, res) => {
-
     // get the page's HTML directly
     return getBody(req)
     // and then find the leading section and return it
@@ -128,15 +121,12 @@ router.get('/page/:title/lead', (req, res) => {
         }
         res.status(200).type('html').end(leadSec);
     });
-
 });
 
 module.exports = (appObj) => {
-
     return {
         path: '/',
         api_version: 1,
         router
     };
-
 };

@@ -13,7 +13,6 @@ let baseUrl = null;
 const server = new Server();
 
 function validateExamples(pathStr, defParams, mSpec) {
-
     const uri = new URI(pathStr, {}, true);
 
     if (!mSpec) {
@@ -44,7 +43,6 @@ function validateExamples(pathStr, defParams, mSpec) {
     });
 
     return true;
-
 }
 
 function constructTestCase(title, path, method, request, response) {
@@ -64,7 +62,6 @@ function constructTestCase(title, path, method, request, response) {
             body: response.body
         }
     };
-
 }
 
 function constructTests(spec) {
@@ -110,7 +107,6 @@ function constructTests(spec) {
 }
 
 function cmp(result, expected, errMsg) {
-
     if (expected === null || expected === undefined) {
         // nothing to expect, so we can return
         return true;
@@ -162,7 +158,6 @@ function cmp(result, expected, errMsg) {
 
     assert.deepEqual(result, expected, errMsg);
     return true;
-
 }
 
 function validateArray(val, resVal, key) {
@@ -245,7 +240,6 @@ function validateTestResponse(testCase, res) {
 }
 
 describe('Swagger spec', function () {
-
     this.timeout(20000);
 
     before(() => server.start());

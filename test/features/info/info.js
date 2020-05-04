@@ -5,7 +5,6 @@ const assert = require('../../utils/assert.js');
 const Server = require('../../utils/server.js');
 
 describe('service information', function () {
-
     this.timeout(20000);
 
     let infoUri = null;

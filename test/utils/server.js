@@ -49,7 +49,6 @@ class TestServiceTemplateNodeRunner extends TestRunner {
             conf: this._runner._impl.config,
             spec: this._spec
         };
-
     }
 }
 

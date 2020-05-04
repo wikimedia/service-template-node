@@ -22,12 +22,10 @@ const router = sUtil.router();
  * direct error handling
  */
 router.get('/err/array', (req, res) => {
-
     // let's create an array with -1 elems!
     const arr = new Array(-1);
     // this is never reached
     res.send(arr.join());
-
 });
 
 /**
@@ -37,7 +35,6 @@ router.get('/err/array', (req, res) => {
  * automatically handled by the template.
  */
 router.get('/err/file', (req, res) => {
-
     // NOTE the return statement here, the promise
     // must be returned!
     // read the file
@@ -47,7 +44,6 @@ router.get('/err/file', (req, res) => {
         // note that this point is never reached
         res.send(text);
     });
-
 });
 
 /**
@@ -55,13 +51,11 @@ router.get('/err/file', (req, res) => {
  * Throws a generic error manually
  */
 router.get('/err/manual/error', (req, res) => {
-
     // simulate a constraint check
     const max = 50;
     if (max > 10) {
         throw new Error(`A maximum value of 10 is expected, ${max} given!`);
     }
-
 });
 
 /**
@@ -69,7 +63,6 @@ router.get('/err/manual/error', (req, res) => {
  * Denies access to this resource endpoint
  */
 router.get('/err/manual/deny', (req, res) => {
-
     // don't allow access
     throw new HTTPError({
         status: 403,
@@ -77,14 +70,12 @@ router.get('/err/manual/deny', (req, res) => {
         title: 'Access denied',
         detail: 'No access is allowed to this endpoint'
     });
-
 });
 
 /**
  * GET /err/manual/auth
  */
 router.get('/err/manual/auth', (req, res) => {
-
     // pretend to read a token file
     // again, note the return statement
     return fs.readFileAsync(`${__dirname}/../static/index.html`)
@@ -100,7 +91,6 @@ router.get('/err/manual/auth', (req, res) => {
             });
         }
     });
-
 });
 
 /*
@@ -121,11 +111,9 @@ router.get('/req/uri/:uri', (req, res) => {
 });
 
 module.exports = (appObj) => {
-
     return {
         path: '/ex',
         skip_domain: true,
         router
     };
-
 };

@@ -24,6 +24,7 @@
     "no-multi-spaces": "off",
     "prefer-const": "error",
     "no-underscore-dangle": "off",
-    "array-bracket-spacing": "off"
+    "array-bracket-spacing": "off",
+    "padded-blocks": ["error", "never"]
   }
 }

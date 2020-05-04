@@ -17,7 +17,6 @@ let app;
  * Gets some basic info about this service
  */
 router.get('/', (req, res) => {
-
     // simple sync return
     res.json({
         name: app.info.name,
@@ -25,7 +24,6 @@ router.get('/', (req, res) => {
         description: app.info.description,
         home: app.info.homepage
     });
-
 });
 
 /**
@@ -33,10 +31,8 @@ router.get('/', (req, res) => {
  * Gets the service's name as defined in package.json
  */
 router.get('/name', (req, res) => {
-
     // simple return
     res.json({ name: app.info.name });
-
 });
 
 /**
@@ -44,10 +40,8 @@ router.get('/name', (req, res) => {
  * Gets the service's version as defined in package.json
  */
 router.get('/version', (req, res) => {
-
     // simple return
     res.json({ version: app.info.version });
-
 });
 
 /**
@@ -56,7 +50,6 @@ router.get('/version', (req, res) => {
  * returns a 404 otherwise
  */
 router.all('/home', (req, res) => {
-
     const home = app.info.homepage;
     if (home && /^http/.test(home)) {
         // we have a home page URI defined, so send it
@@ -65,11 +58,9 @@ router.all('/home', (req, res) => {
         // no URI defined for the home page, error out
         res.status(404).end(`No home page URL defined for ${app.info.name}`);
     }
-
 });
 
 module.exports = (appObj) => {
-
     app = appObj;
 
     return {
@@ -77,5 +68,4 @@ module.exports = (appObj) => {
         skip_domain: true,
         router
     };
-
 };

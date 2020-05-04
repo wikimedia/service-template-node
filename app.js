@@ -19,7 +19,6 @@ const path = require('path');
  * @return {bluebird} the promise resolving to the app object
  */
 function initApp(options) {
-
     // the main application object
     const app = express();
 
@@ -129,7 +128,6 @@ function initApp(options) {
     app.use(bodyParser.urlencoded({ extended: true }));
 
     return BBPromise.resolve(app);
-
 }
 
 /**
@@ -139,7 +137,6 @@ function initApp(options) {
  * @return {bluebird} a promise resolving to the app object
  */
 function loadRoutes(app, dir) {
-
     // recursively load routes from .js files under routes/
     return fs.readdirAsync(dir).map((fname) => {
         return BBPromise.try(() => {
@@ -182,7 +179,6 @@ function loadRoutes(app, dir) {
         // route loading is now complete, return the app object
         return BBPromise.resolve(app);
     });
-
 }
 
 /**
@@ -191,7 +187,6 @@ function loadRoutes(app, dir) {
  * @return {bluebird} a promise creating the web server
  */
 function createServer(app) {
-
     // return a promise which creates an HTTP server,
     // attaches the app to it, and starts accepting
     // incoming client requests
@@ -216,7 +211,6 @@ function createServer(app) {
 
         return server;
     });
-
 }
 
 /**
@@ -228,7 +222,6 @@ function createServer(app) {
  * @return {bluebird} HTTP server
  */
 module.exports = (options) => {
-
     return initApp(options)
     .then((app) => loadRoutes(app, `${__dirname}/routes`))
     .then((app) => {
@@ -236,5 +229,4 @@ module.exports = (options) => {
         app.use('/static', express.static(`${__dirname}/static`));
         return app;
     }).then(createServer);
-
 };
