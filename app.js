@@ -37,7 +37,7 @@ function initApp(options) {
     app.conf.compression_level = app.conf.compression_level === undefined ? 3 : app.conf.compression_level;
     app.conf.cors = app.conf.cors === undefined ? '*' : app.conf.cors;
     if (app.conf.csp === undefined) {
-        app.conf.csp = "default-src 'self'; object-src 'none'; media-src *; img-src *; style-src *; frame-ancestors 'self'";
+        app.conf.csp = "default-src 'self'; object-src 'none'; media-src 'none'; img-src 'none'; style-src 'none'; base-uri 'self'; frame-ancestors 'self'";
     }
 
     // set outgoing proxy
@@ -107,8 +107,6 @@ function initApp(options) {
             res.header('x-content-type-options', 'nosniff');
             res.header('x-frame-options', 'SAMEORIGIN');
             res.header('content-security-policy', app.conf.csp);
-            res.header('x-content-security-policy', app.conf.csp);
-            res.header('x-webkit-csp', app.conf.csp);
         }
         sUtil.initAndLogRequest(req, app);
         next();
