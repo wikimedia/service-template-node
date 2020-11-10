@@ -1,8 +1,6 @@
 {
   "extends": [
-    "wikimedia/server",
-    "wikimedia/node",
-    "wikimedia/language/es2016"
+    "wikimedia/server"
   ],
   "plugins": ["json", "jsdoc"],
   "rules": {
@@ -24,7 +22,6 @@
     "space-in-parens": ["error", "never"],
     "computed-property-spacing": "off",
     "no-multi-spaces": "off",
-    "prefer-const": "error",
     "no-underscore-dangle": "off",
     "array-bracket-spacing": "off"
   }
