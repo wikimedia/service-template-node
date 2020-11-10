@@ -74,6 +74,7 @@ router.get('/siteinfo/:prop?', (req, res) => {
 /**
  * A helper function that obtains the Parsoid HTML for a given title and
  * loads it into a domino DOM document instance.
+ *
  * @param {!Object} req the incoming request
  * @return {Promise} a promise resolving as the HTML element object
  */
