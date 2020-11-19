@@ -2,8 +2,8 @@
   "extends": "../.eslintrc.json",
   "env": { "mocha": true },
   "rules": {
+    "max-len": "off",
     "no-console": "off",
-    "no-invalid-this": "off",
-    "max-len": "off"
+    "no-invalid-this": "off"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "service-template-node",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "A blueprint for MediaWiki REST API services",
   "main": "./app.js",
   "scripts": {
@@ -47,9 +47,9 @@
   },
   "devDependencies": {
     "ajv": "^6.5.4",
-    "eslint-config-wikimedia": "^0.10.0",
-    "eslint-plugin-jsdoc": "^4.0.1",
-    "eslint-plugin-json": "^1.2.1",
+    "eslint-config-wikimedia": "^0.17.0",
+    "eslint-plugin-jsdoc": "^30.6.2",
+    "eslint-plugin-json": "^2.1.2",
     "extend": "^3.0.2",
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.3.0",
@@ -59,7 +59,7 @@
   },
   "deploy": {
     "target": "debian",
-    "node": "6.11.1",
+    "node": "10.15.2",
     "dependencies": {
       "_all": []
     }

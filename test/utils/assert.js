@@ -16,6 +16,7 @@ function deepEqual(result, expected, message) {
 
 /**
  * Asserts whether the return status was as expected
+ *
  * @param {Object} res
  * @param {integer} expected
  */
@@ -28,6 +29,7 @@ function status(res, expected) {
 
 /**
  * Asserts whether content type was as expected
+ *
  * @param {Object} res
  * @param {string} expectedRegexString
  */
