@@ -16,11 +16,13 @@ logging:
 #    host: logstash1003.eqiad.wmnet
 #    port: 12201
 
-# Statsd metrics reporter
 metrics:
-  #type: log
-  #host: localhost
-  #port: 8125
+#  - type: prometheus
+#    port: 9000
+# Statsd metrics reporter
+#  - type: statsd
+#    host: localhost
+#    port: 8125
 
 services:
   - name: service-template-node
