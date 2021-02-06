@@ -56,12 +56,5 @@
     "mocha.parallel": "^0.15.6",
     "nyc": "^14.1.1",
     "openapi-schema-validator": "^3.0.3"
-  },
-  "deploy": {
-    "target": "debian",
-    "node": "10.15.2",
-    "dependencies": {
-      "_all": []
-    }
   }
 }
