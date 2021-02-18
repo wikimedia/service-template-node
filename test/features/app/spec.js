@@ -2,7 +2,7 @@
 
 const parallel = require('mocha.parallel');
 const preq   = require('preq');
-const { assert } = require('../../utils/assert.js');
+const assert = require('../../utils/assert.js');
 const Server = require('../../utils/server.js');
 const URI    = require('swagger-router').URI;
 const OpenAPISchemaValidator = require('openapi-schema-validator').default;
