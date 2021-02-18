@@ -1,7 +1,7 @@
 'use strict';
 
 const preq   = require('preq');
-const assert = require('../../utils/assert.js');
+const { assert } = require('../../utils/assert.js');
 const Server = require('../../utils/server.js');
 
 describe('service information', function () {
