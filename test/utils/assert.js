@@ -1,92 +1,37 @@
 'use strict';
 
-const assert = require('assert');
+const { use } = require('chai');
 
-function deepEqual(result, expected, message) {
+module.exports = use(function (_chai, _utils) {
+	const { assert } = _chai;
 
-    try {
-        assert.deepEqual(result, expected, message);
-    } catch (e) {
-        console.log(`Expected:\n${JSON.stringify(expected, null, 2)}`);
-        console.log(`Result:\n${JSON.stringify(result, null, 2)}`);
-        throw e;
-    }
+    assert.status = (res, expected) => {
+        const msg = `Expected status to be ${expected}, but was ${res.status}`;
+        new _chai.Assertion(res.status, msg, assert.status, true).to.eql(expected);
+    };
 
-}
+    assert.contentType = (res, expectedRegexString) => {
+        const actual = res.headers['content-type'];
+        const msg = `Expected content-type to match ${expectedRegexString}, but was ${actual}`;
+        new _chai.Assertion(actual, msg, assert.contentType, true).to.match(RegExp(expectedRegexString));
+    };
 
-/**
- * Asserts whether the return status was as expected
- *
- * @param {Object} res
- * @param {integer} expected
- */
-function status(res, expected) {
+    assert.fails = (promise, onRejected) => {
 
-    deepEqual(res.status, expected,
-        `Expected status to be ${expected}, but was ${res.status}`);
+        let failed = false;
 
-}
-
-/**
- * Asserts whether content type was as expected
- *
- * @param {Object} res
- * @param {string} expectedRegexString
- */
-function contentType(res, expectedRegexString) {
-
-    const actual = res.headers['content-type'];
-    assert.ok(RegExp(expectedRegexString).test(actual),
-        `Expected content-type to match ${expectedRegexString}, but was ${actual}`);
-
-}
-
-function isDeepEqual(result, expected, message) {
-
-    try {
-        assert.deepEqual(result, expected, message);
-        return true;
-    } catch (e) {
-        return false;
-    }
-
-}
-
-function notDeepEqual(result, expected, message) {
-
-    try {
-        assert.notDeepEqual(result, expected, message);
-    } catch (e) {
-        console.log(`Not expected:\n${JSON.stringify(expected, null, 2)}`);
-        console.log(`Result:\n${JSON.stringify(result, null, 2)}`);
-        throw e;
-    }
-
-}
-
-function fails(promise, onRejected) {
-
-    let failed = false;
-
-    function trackFailure(e) {
-        failed = true;
-        return onRejected(e);
-    }
-
-    function check() {
-        if (!failed) {
-            throw new Error('expected error was not thrown');
+        function trackFailure(e) {
+            failed = true;
+            return onRejected(e);
         }
-    }
 
-    return promise.catch(trackFailure).then(check);
+        function check() {
+            if (!failed) {
+                throw new Error('expected error was not thrown');
+            }
+        }
+        return promise.catch(trackFailure).then(check);
 
-}
+    };
 
-module.exports.ok             = assert.ok;
-module.exports.fails          = fails;
-module.exports.deepEqual      = deepEqual;
-module.exports.isDeepEqual    = isDeepEqual;
-module.exports.notDeepEqual   = notDeepEqual;
-module.exports.contentType    = contentType;
-module.exports.status         = status;
+}).assert;

@@ -71,4 +71,13 @@ describe('service information', function () {
             assert.notDeepEqual(res.body.home, undefined, 'No home field returned!');
         });
     });
+
+    it('should fail to get the service info for invalid endpoint', () => {
+        return assert.fails(
+            preq.get({ uri: `${infoUri}zzz` }),
+            (res) => {
+                assert.deepEqual(res.status, 404);
+            }
+        );
+    });
 });
