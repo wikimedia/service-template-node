@@ -69,6 +69,10 @@ reporting the percentage of code covered. Start it with:
 npm run-script coverage
 ```
 
+### Docker
+
+The `docker-start` and `docker-test` scripts are deprecated as of version 2.8.2, and only remain for backwrads compatibility. Instead, developers should configure `blubber.yaml` and use [Blubber](https://github.com/wikimedia/blubber) to generate the desired Dockerfile.
+
 ### Troubleshooting
 
 In a lot of cases when there is an issue with node it helps to recreate the
