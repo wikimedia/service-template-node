@@ -71,7 +71,7 @@ npm run-script coverage
 
 ### Docker
 
-The `docker-start` and `docker-test` scripts are deprecated as of version 2.8.2, and only remain for backwrads compatibility. Instead, developers should configure `blubber.yaml` and use [Blubber](https://github.com/wikimedia/blubber) to generate the desired Dockerfile.
+The `docker-start` and `docker-test` scripts are deprecated, and only remain for backwards compatibility. Instead, developers should configure `blubber.yaml` and use [Blubber](https://github.com/wikimedia/blubber) to generate the desired Dockerfile.
 
 ### Troubleshooting
 
