@@ -4,4 +4,4 @@ sudo: false
 
 node_js:
   - "10"
-  - "node"
+  - "12"
