@@ -69,6 +69,10 @@ reporting the percentage of code covered. Start it with:
 npm run-script coverage
 ```
 
+### Issue Tracking
+
+We use Phabricator to track and create new issues. See the list of [open issues](https://phabricator.wikimedia.org/project/board/1072/query/open/) and feel free to submit a [new one](https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projects=PHID-PROJ-quztkvlbvay2bszm6w4v).
+
 ### Troubleshooting
 
 In a lot of cases when there is an issue with node it helps to recreate the
