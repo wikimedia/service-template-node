@@ -1,67 +1,59 @@
 {
-  "name": "service-template-node",
-  "version": "0.8.0",
-  "description": "A blueprint for MediaWiki REST API services",
-  "main": "./app.js",
-  "scripts": {
-    "start": "service-runner",
-    "test": "npm run lint && PREQ_CONNECT_TIMEOUT=15 mocha",
-    "lint": "eslint --max-warnings 0 --ext .js --ext .json .",
-    "lint:fix": "eslint --fix .",
-    "docker-start": "service-runner docker-start",
-    "docker-test": "service-runner docker-test",
-    "test-build": "service-runner docker-test && service-runner build --deploy-repo --force",
-    "coverage": "PREQ_CONNECT_TIMEOUT=15 nyc --reporter=lcov _mocha"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/wikimedia/service-template-node.git"
-  },
-  "keywords": [
-    "REST",
-    "API",
-    "service template",
-    "MediaWiki"
-  ],
-  "author": "Wikimedia Service Team <services@lists.wikimedia.org>",
-  "contributors": [],
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://phabricator.wikimedia.org/tag/service-template-node/"
-  },
-  "homepage": "https://github.com/wikimedia/service-template-node",
-  "dependencies": {
-    "bluebird": "^3.5.5",
-    "body-parser": "^1.19.0",
-    "bunyan": "^1.8.12",
-    "compression": "^1.7.4",
-    "domino": "^2.1.3",
-    "express": "^4.17.1",
-    "http-shutdown": "^1.2.1",
-    "js-yaml": "^3.13.1",
-    "preq": "^0.5.9",
-    "service-runner": "^2.7.1",
-    "swagger-router": "^0.7.4",
-    "swagger-ui-dist": "^3.22.3",
-    "uuid": "^3.3.2"
-  },
-  "devDependencies": {
-    "ajv": "^6.5.4",
-    "eslint-config-wikimedia": "^0.17.0",
-    "eslint-plugin-jsdoc": "^30.6.2",
-    "eslint-plugin-json": "^2.1.2",
-    "extend": "^3.0.2",
-    "mocha": "^5.2.0",
-    "mocha-lcov-reporter": "^1.3.0",
-    "mocha.parallel": "^0.15.6",
-    "nyc": "^14.1.1",
-    "openapi-schema-validator": "^3.0.3"
-  },
-  "deploy": {
-    "target": "debian",
-    "node": "10.15.2",
-    "dependencies": {
-      "_all": []
-    }
-  }
+	"name": "service-template-node",
+	"version": "0.10.0",
+	"description": "A blueprint for MediaWiki REST API services",
+	"main": "./app.js",
+	"scripts": {
+		"start": "service-runner",
+		"test": "npm run lint && PREQ_CONNECT_TIMEOUT=15 mocha",
+		"lint": "eslint --max-warnings 0 --ext .js --ext .json .",
+		"lint:fix": "eslint --fix .",
+		"docker-start": "service-runner docker-start",
+		"docker-test": "service-runner docker-test",
+		"test-build": "service-runner docker-test && service-runner build --deploy-repo --force",
+		"coverage": "PREQ_CONNECT_TIMEOUT=15 nyc --reporter=lcov _mocha"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/wikimedia/service-template-node.git"
+	},
+	"keywords": [
+		"REST",
+		"API",
+		"service template",
+		"MediaWiki"
+	],
+	"author": "Wikimedia Service Team <services@lists.wikimedia.org>",
+	"contributors": [],
+	"license": "Apache-2.0",
+	"bugs": {
+		"url": "https://phabricator.wikimedia.org/tag/service-template-node/"
+	},
+	"homepage": "https://github.com/wikimedia/service-template-node",
+	"dependencies": {
+		"bluebird": "^3.5.5",
+		"body-parser": "^1.19.0",
+		"bunyan": "^1.8.12",
+		"compression": "^1.7.4",
+		"domino": "^2.1.3",
+		"express": "^4.17.1",
+		"http-shutdown": "^1.2.1",
+		"js-yaml": "^3.13.1",
+		"preq": "^0.5.9",
+		"service-runner": "^2.8.4",
+		"swagger-router": "^0.7.4",
+		"swagger-ui-dist": "^3.22.3",
+		"uuid": "^3.3.2"
+	},
+	"devDependencies": {
+		"ajv": "^6.5.4",
+		"chai": "^4.3.0",
+		"eslint-config-wikimedia": "0.20.0",
+		"extend": "^3.0.2",
+		"mocha": "^5.2.0",
+		"mocha-lcov-reporter": "^1.3.0",
+		"mocha.parallel": "^0.15.6",
+		"nyc": "^14.1.1",
+		"openapi-schema-validator": "^3.0.3"
+	}
 }
