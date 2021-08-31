@@ -10,11 +10,13 @@ worker_heap_limit_mb: 500
 # Logger info
 logging:
   level: warn
+#  name: <your app name>
   streams:
-  # Use gelf-stream -> logstash
-  - type: gelf
-    host: logstash1003.eqiad.wmnet
-    port: 12201
+    - type: syslog
+      host: localhost
+      port: 10514
+      prefix: '@cee: '
+      name: node
 
 # Statsd metrics reporter
 metrics:
