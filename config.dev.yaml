@@ -10,11 +10,12 @@ worker_heap_limit_mb: 250
 # Logger info
 logging:
   level: trace
-#  streams:
-#  # Use gelf-stream -> logstash
-#  - type: gelf
-#    host: logstash1003.eqiad.wmnet
-#    port: 12201
+  streams:
+  # Use syslog -> logstash
+  - type: syslog
+    host: localhost
+    port: 10514
+    prefix: '@cee: '
 
 # Statsd metrics reporter
 metrics:
