@@ -10,12 +10,12 @@ worker_heap_limit_mb: 500
 # Logger info
 logging:
   level: warn
-  streams:
-  # Use syslog -> logstash
-  - type: syslog
-    host: localhost
-    port: 10514
-    prefix: '@cee: '
+  # streams:
+  # # Use syslog -> logstash
+  # - type: syslog
+  #   host: localhost
+  #   port: 10514
+  #   prefix: '@cee: '
 
 # Statsd metrics reporter
 metrics:
