@@ -30,7 +30,7 @@ function initApp(options) {
     app.conf = options.config;      // this app's config options
     app.info = packageInfo;         // this app's package info
 
-    // ensure some sane defaults
+    // ensure some reasonable defaults
     app.conf.port = app.conf.port || 8888;
     app.conf.interface = app.conf.interface || '0.0.0.0';
     // eslint-disable-next-line max-len
