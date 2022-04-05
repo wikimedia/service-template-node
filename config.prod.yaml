@@ -10,12 +10,12 @@ worker_heap_limit_mb: 500
 # Logger info
 logging:
   level: warn
-#  name: <your app name>
+  #  name: <your app name>
   streams:
     - type: syslog
       host: localhost
       port: 10514
-      prefix: '@cee: '
+      prefix: "@cee: "
       name: node
 
 # Statsd metrics reporter
@@ -38,7 +38,7 @@ services:
       # the location of the spec, defaults to spec.yaml if not specified
       # spec: ./spec.template.yaml
       # allow cross-domain requests to the API (default '*')
-      cors: '*'
+      cors: "*"
       # to disable use:
       # cors: false
       # to restrict to a particular domain, use:
@@ -70,13 +70,13 @@ services:
         method: post
         uri: http://api.svc.eqiad.wmnet/w/api.php
         headers:
-          host: '{{request.params.domain}}'
-          user-agent: '{{user-agent}}'
-        body: '{{ default(request.query, {}) }}'
+          host: "{{request.params.domain}}"
+          user-agent: "{{user-agent}}"
+        body: "{{ default(request.query, {}) }}"
       # the template used for contacting RESTBase
       restbase_req:
-        method: '{{request.method}}'
+        method: "{{request.method}}"
         uri: http://restbase.svc.eqiad.wmnet/{{domain}}/v1/{+path}
-        query: '{{ default(request.query, {}) }}'
-        headers: '{{request.headers}}'
-        body: '{{request.body}}'
+        query: "{{ default(request.query, {}) }}"
+        headers: "{{request.headers}}"
+        body: "{{request.body}}"

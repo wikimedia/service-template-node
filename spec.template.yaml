@@ -29,7 +29,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/problem'
+                $ref: "#/components/schemas/problem"
       x-amples:
         - title: robots.txt check
           request: {}
@@ -48,7 +48,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/problem'
+                $ref: "#/components/schemas/problem"
       x-amples:
         - title: root with no query params
           request: {}
@@ -81,7 +81,7 @@ paths:
         - Example
       description: Calls the MW API siteinfo action and returns the response
       parameters:
-        - $ref: '#/components/parameters/domain'
+        - $ref: "#/components/parameters/domain"
       responses:
         200:
           description: Success
@@ -90,19 +90,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/problem'
+                $ref: "#/components/schemas/problem"
         504:
           description: Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/problem'
+                $ref: "#/components/schemas/problem"
         default:
           description: Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/problem'
+                $ref: "#/components/schemas/problem"
       x-amples:
         - title: site info for default domain
           request: {}
@@ -126,8 +126,8 @@ paths:
         - Example
       description: Calls the MW API siteinfo action and returns the response
       parameters:
-        - $ref: '#/components/parameters/domain'
-        - $ref: '#/components/parameters/prop'
+        - $ref: "#/components/parameters/domain"
+        - $ref: "#/components/parameters/prop"
       responses:
         200:
           description: Success
@@ -136,19 +136,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/problem'
+                $ref: "#/components/schemas/problem"
         504:
           description: Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/problem'
+                $ref: "#/components/schemas/problem"
         default:
           description: Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/problem'
+                $ref: "#/components/schemas/problem"
       x-amples:
         - title: site info for default domain
           request: {}
@@ -189,8 +189,8 @@ paths:
         - Example
       description: Gets the HTML for the page with the given title
       parameters:
-        - $ref: '#/components/parameters/domain'
-        - $ref: '#/components/parameters/title'
+        - $ref: "#/components/parameters/domain"
+        - $ref: "#/components/parameters/title"
       responses:
         200:
           description: OK
@@ -199,13 +199,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/problem'
+                $ref: "#/components/schemas/problem"
         default:
           description: Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/problem'
+                $ref: "#/components/schemas/problem"
       x-amples:
         - title: get the Foobar page from en.wp.org
           request:
@@ -223,8 +223,8 @@ paths:
         - Example
       description: Gets the lead-section HTML for the page with the given title
       parameters:
-        - $ref: '#/components/parameters/domain'
-        - $ref: '#/components/parameters/title'
+        - $ref: "#/components/parameters/domain"
+        - $ref: "#/components/parameters/title"
       responses:
         200:
           description: OK
@@ -233,13 +233,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/problem'
+                $ref: "#/components/schemas/problem"
         default:
           description: Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/problem'
+                $ref: "#/components/schemas/problem"
       x-amples:
         - title: get the lead section for Barack Obama
           request:
@@ -334,7 +334,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/problem'
+                $ref: "#/components/schemas/problem"
       x-amples:
         - title: wrong array declaration example
           request: {}
@@ -355,7 +355,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/problem'
+                $ref: "#/components/schemas/problem"
       x-amples:
         - title: non-existing file example
           request: {}
@@ -376,7 +376,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/problem'
+                $ref: "#/components/schemas/problem"
       x-amples:
         - title: user error example
           request: {}
@@ -397,7 +397,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/problem'
+                $ref: "#/components/schemas/problem"
       x-amples:
         - title: access denied error example
           request: {}
@@ -418,7 +418,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/problem'
+                $ref: "#/components/schemas/problem"
       x-amples:
         - title: unauthorised error example
           request: {}
@@ -439,7 +439,7 @@ paths:
         - title: Get example home page
           request:
             params:
-              uri: 'http://www.example.com'
+              uri: "http://www.example.com"
 
 components:
   schemas:
