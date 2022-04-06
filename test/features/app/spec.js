@@ -188,7 +188,7 @@ function validateArray(val, resVal, key) {
         `Different size of array for field ${key}, expected ${arrVal.length
         } actual ${resVal.length}`);
     arrVal.forEach((item, index) => {
-        validateBody(resVal[index], item); // eslint-disable-line
+        validateBody(resVal[index], item);
     });
 }
 
