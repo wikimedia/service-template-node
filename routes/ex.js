@@ -23,10 +23,10 @@ const router = sUtil.router();
  */
 router.get('/err/array', (req, res) => {
 
-    // let's create an array with -1 elems!
-    const arr = new Array(-1);
-    // this is never reached
-    res.send(arr.join());
+	// let's create an array with -1 elems!
+	const arr = new Array(-1);
+	// this is never reached
+	res.send(arr.join());
 
 });
 
@@ -38,15 +38,15 @@ router.get('/err/array', (req, res) => {
  */
 router.get('/err/file', (req, res) => {
 
-    // NOTE the return statement here, the promise
-    // must be returned!
-    // read the file
-    return fs.readFileAsync('../mushrooms.txt')
-    // and then send it back to the caller
-    .then((text) => {
-        // note that this point is never reached
-        res.send(text);
-    });
+	// NOTE the return statement here, the promise
+	// must be returned!
+	// read the file
+	return fs.readFileAsync('../mushrooms.txt')
+	// and then send it back to the caller
+		.then((text) => {
+			// note that this point is never reached
+			res.send(text);
+		});
 
 });
 
@@ -56,11 +56,11 @@ router.get('/err/file', (req, res) => {
  */
 router.get('/err/manual/error', (req, res) => {
 
-    // simulate a constraint check
-    const max = 50;
-    if (max > 10) {
-        throw new Error(`A maximum value of 10 is expected, ${max} given!`);
-    }
+	// simulate a constraint check
+	const max = 50;
+	if (max > 10) {
+		throw new Error(`A maximum value of 10 is expected, ${max} given!`);
+	}
 
 });
 
@@ -70,13 +70,13 @@ router.get('/err/manual/error', (req, res) => {
  */
 router.get('/err/manual/deny', (req, res) => {
 
-    // don't allow access
-    throw new HTTPError({
-        status: 403,
-        type: 'access_denied',
-        title: 'Access denied',
-        detail: 'No access is allowed to this endpoint'
-    });
+	// don't allow access
+	throw new HTTPError({
+		status: 403,
+		type: 'access_denied',
+		title: 'Access denied',
+		detail: 'No access is allowed to this endpoint'
+	});
 
 });
 
@@ -85,21 +85,21 @@ router.get('/err/manual/deny', (req, res) => {
  */
 router.get('/err/manual/auth', (req, res) => {
 
-    // pretend to read a token file
-    // again, note the return statement
-    return fs.readFileAsync(`${__dirname}/../static/index.html`)
-    // and pretend to compare it with what the user sent
-    .then((token) => {
-        if (!req.params || req.params.token !== token) {
-            // nope, not authorised to be here, sorry
-            throw new HTTPError({
-                status: 401,
-                type: 'unauthorized',
-                title: 'Unauthorized',
-                detail: 'You are not authorized to fetch this endpoint!'
-            });
-        }
-    });
+	// pretend to read a token file
+	// again, note the return statement
+	return fs.readFileAsync(`${__dirname}/../static/index.html`)
+	// and pretend to compare it with what the user sent
+		.then((token) => {
+			if (!req.params || req.params.token !== token) {
+				// nope, not authorised to be here, sorry
+				throw new HTTPError({
+					status: 401,
+					type: 'unauthorized',
+					title: 'Unauthorized',
+					detail: 'You are not authorized to fetch this endpoint!'
+				});
+			}
+		});
 
 });
 
@@ -111,21 +111,21 @@ router.get('/err/manual/auth', (req, res) => {
  * GET /req/uri
  */
 router.get('/req/uri/:uri', (req, res) => {
-    // to issue an external request, use req.issueRequest
-    return req.issueRequest(req.params.uri)
-    .then((r) => {
-        res.status(r.status);
-        res.set(r.headers);
-        res.end(r.body);
-    });
+	// to issue an external request, use req.issueRequest
+	return req.issueRequest(req.params.uri)
+		.then((r) => {
+			res.status(r.status);
+			res.set(r.headers);
+			res.end(r.body);
+		});
 });
 
 module.exports = (appObj) => {
 
-    return {
-        path: '/ex',
-        skip_domain: true,
-        router
-    };
+	return {
+		path: '/ex',
+		skip_domain: true,
+		router
+	};
 
 };
