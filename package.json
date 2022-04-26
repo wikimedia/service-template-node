@@ -42,7 +42,7 @@
 		"preq": "^0.5.9",
 		"service-runner": "^3.0.0",
 		"swagger-router": "^0.7.4",
-		"swagger-ui-dist": "^3.22.3",
+		"swagger-ui-dist": "^4.10.3",
 		"uuid": "^3.3.2"
 	},
 	"devDependencies": {
