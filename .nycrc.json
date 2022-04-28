@@ -1,0 +1,30 @@
+{
+	"//": "Test the routes; your repo may have other directories which should also be tested.",
+	"include": [
+		"routes/"
+	],
+
+	"//": "Don't silently accept files with no tests at all.",
+	"all": true,
+
+	"//": "Put the reports where we expect them.",
+	"report-dir": "coverage/",
+
+	"//": "Report HTML (lcov), XML (clover), and a summary table in the terminal (text-summary).",
+	"reporter": [
+		"lcov",
+		"clover",
+		"text-summary"
+	],
+
+	"//": "Cache results between runs for developer happiness.",
+	"cache": true,
+
+	"//": "This is where you can enforce some level of code coverage, ideally enforced per-file.",
+	"per-file": true,
+	"statements": 0.0,
+	"branches": 0.0,
+	"functions": 0.0,
+	"lines": 0.0,
+	"check-coverage": false
+}
