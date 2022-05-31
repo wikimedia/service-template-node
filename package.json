@@ -46,7 +46,7 @@
 		"uuid": "^3.3.2"
 	},
 	"devDependencies": {
-		"ajv": "^6.5.4",
+		"ajv": "^8.6.2",
 		"chai": "^4.3.0",
 		"eslint-config-wikimedia": "0.22.1",
 		"extend": "^3.0.2",
