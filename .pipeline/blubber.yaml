@@ -9,7 +9,7 @@ variants:
   build:
     base: docker-registry.wikimedia.org/nodejs12-devel
     copies: [local]
-    apt: { packages: [git, build-essential, python-pkgconfig] }
+    apt: { packages: [git, build-essential, python, pkg-config] }
     node: { requirements: [package.json] }
   development:
     includes: [build]
