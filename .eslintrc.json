@@ -23,7 +23,9 @@
 			}
 		],
 		"space-in-parens": ["error", "never"],
-		"jsdoc/no-undefined-types": "off"
+		"jsdoc/no-undefined-types": "off",
+		"es-x/no-symbol-prototype-description": "off",
+		"es-x/no-hashbang": "off"
 	},
 	"overrides": [
 		{
