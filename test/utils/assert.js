@@ -6,13 +6,13 @@ module.exports = use(function (_chai, _utils) {
 	const { assert } = _chai;
 
 	assert.status = (res, expected) => {
-		const msg = `Expected status to be ${expected}, but was ${res.status}`;
+		const msg = `Expected status to be ${ expected }, but was ${ res.status }`;
 		new _chai.Assertion(res.status, msg, assert.status, true).to.eql(expected);
 	};
 
 	assert.contentType = (res, expectedRegexString) => {
 		const actual = res.headers['content-type'];
-		const msg = `Expected content-type to match ${expectedRegexString}, but was ${actual}`;
+		const msg = `Expected content-type to match ${ expectedRegexString }, but was ${ actual }`;
 		new _chai.Assertion(actual, msg, assert.contentType, true).to.match(RegExp(expectedRegexString));
 	};
 

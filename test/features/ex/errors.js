@@ -13,7 +13,7 @@ describe('errors', function () {
 	before(() => {
 		return server.start()
 			.then(() => {
-				uri = `${server.config.uri}ex/err/`;
+				uri = `${ server.config.uri }ex/err/`;
 			});
 	});
 
@@ -21,10 +21,10 @@ describe('errors', function () {
 
 	it('array creation error', () => {
 		return preq.get({
-			uri: `${uri}array`
+			uri: `${ uri }array`
 		}).then((res) => {
 			// if we are here, no error was thrown, not good
-			throw new Error(`Expected an error to be thrown, got status: ${res.status}`);
+			throw new Error(`Expected an error to be thrown, got status: ${ res.status }`);
 		}, (err) => {
 			// inspect the status
 			assert.deepEqual(err.status, 500);
@@ -35,10 +35,10 @@ describe('errors', function () {
 
 	it('file read error', () => {
 		return preq.get({
-			uri: `${uri}file`
+			uri: `${ uri }file`
 		}).then((res) => {
 			// if we are here, no error was thrown, not good
-			throw new Error(`Expected an error to be thrown, got status: ${res.status}`);
+			throw new Error(`Expected an error to be thrown, got status: ${ res.status }`);
 		}, (err) => {
 			// inspect the status
 			assert.deepEqual(err.status, 500);
@@ -49,10 +49,10 @@ describe('errors', function () {
 
 	it('constraint check error', () => {
 		return preq.get({
-			uri: `${uri}manual/error`
+			uri: `${ uri }manual/error`
 		}).then((res) => {
 			// if we are here, no error was thrown, not good
-			throw new Error(`Expected an error to be thrown, got status: ${res.status}`);
+			throw new Error(`Expected an error to be thrown, got status: ${ res.status }`);
 		}, (err) => {
 			// inspect the status
 			assert.deepEqual(err.status, 500);
@@ -63,10 +63,10 @@ describe('errors', function () {
 
 	it('access denied error', () => {
 		return preq.get({
-			uri: `${uri}manual/deny`
+			uri: `${ uri }manual/deny`
 		}).then((res) => {
 			// if we are here, no error was thrown, not good
-			throw new Error(`Expected an error to be thrown, got status: ${res.status}`);
+			throw new Error(`Expected an error to be thrown, got status: ${ res.status }`);
 		}, (err) => {
 			// inspect the status
 			assert.deepEqual(err.status, 403);
@@ -77,10 +77,10 @@ describe('errors', function () {
 
 	it('authorisation error', () => {
 		return preq.get({
-			uri: `${uri}manual/auth`
+			uri: `${ uri }manual/auth`
 		}).then((res) => {
 			// if we are here, no error was thrown, not good
-			throw new Error(`Expected an error to be thrown, got status: ${res.status}`);
+			throw new Error(`Expected an error to be thrown, got status: ${ res.status }`);
 		}, (err) => {
 			// inspect the status
 			assert.deepEqual(err.status, 401);

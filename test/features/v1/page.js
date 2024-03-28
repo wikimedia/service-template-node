@@ -14,7 +14,7 @@ describe('page gets', function () {
 	before(() => {
 		return server.start()
 			.then(() => {
-				uri = `${server.config.uri}en.wikipedia.org/v1/page/Table_(database)/`;
+				uri = `${ server.config.uri }en.wikipedia.org/v1/page/Table_(database)/`;
 			});
 	});
 
@@ -39,7 +39,7 @@ describe('page gets', function () {
 
 	it('should get only the leading section', () => {
 		return preq.get({
-			uri: `${uri}lead`
+			uri: `${ uri }lead`
 		}).then((res) => {
 			// check the status
 			assert.status(res, 200);
@@ -60,7 +60,7 @@ describe('page gets', function () {
 
 	it('should throw a 404 for a non-existent page', () => {
 		return preq.get({
-			uri: `${server.config.uri}en.wikipedia.org/v1/page/Foobar_and_friends`
+			uri: `${ server.config.uri }en.wikipedia.org/v1/page/Foobar_and_friends`
 		}).then((res) => {
 			// if we are here, no error was thrown, not good
 			throw new Error('Expected an error to be thrown, got status: ', res.status);

@@ -51,7 +51,7 @@ router.get('/siteinfo/:prop?', (req, res) => {
 						status: 404,
 						type: 'not_found',
 						title: 'No such property',
-						detail: `Property ${req.params.prop} not found in MW API response!`
+						detail: `Property ${ req.params.prop } not found in MW API response!`
 					});
 				}
 				// ok, return that prop
@@ -81,7 +81,7 @@ router.get('/siteinfo/:prop?', (req, res) => {
 function getBody(req) {
 
 	// get the page
-	return apiUtil.restApiGet(req, `page/html/${req.params.title}`)
+	return apiUtil.restApiGet(req, `page/html/${ req.params.title }`)
 		.then((callRes) => {
 			// and then load and parse the page
 			return BBPromise.resolve(domino.createDocument(callRes.body));
@@ -123,7 +123,7 @@ router.get('/page/:title/lead', (req, res) => {
 				if (!/^\s*$/.test(child.innerHTML)) {
 					// that must be our leading section
 					// so enclose it in a <div>
-					leadSec = `<div id="lead_section">${child.innerHTML}</div>`;
+					leadSec = `<div id="lead_section">${ child.innerHTML }</div>`;
 					break;
 				}
 			}

@@ -4,7 +4,7 @@ const preq   = require('preq');
 const TestRunner = require('service-runner/test/TestServer');
 
 class TestServiceTemplateNodeRunner extends TestRunner {
-	constructor(configPath = `${__dirname}/../../config.yaml`) {
+	constructor(configPath = `${ __dirname }/../../config.yaml`) {
 		super(configPath);
 		this._spec = null;
 	}
@@ -18,10 +18,10 @@ class TestServiceTemplateNodeRunner extends TestRunner {
 		// is the last one in the 'services' list in the config file
 		const myServiceIdx = this._runner._impl.config.services.length - 1;
 		const myService = this._runner._impl.config.services[myServiceIdx];
-		const uri = `http://localhost:${myService.conf.port}/`;
+		const uri = `http://localhost:${ myService.conf.port }/`;
 		if (!this._spec) {
 			// We only want to load this once.
-			preq.get(`${uri}?spec`)
+			preq.get(`${ uri }?spec`)
 				.then((res) => {
 					if (!res.body) {
 						throw new Error('Failed to get spec');

@@ -59,7 +59,7 @@ router.get('/err/manual/error', (req, res) => {
 	// simulate a constraint check
 	const max = 50;
 	if (max > 10) {
-		throw new Error(`A maximum value of 10 is expected, ${max} given!`);
+		throw new Error(`A maximum value of 10 is expected, ${ max } given!`);
 	}
 
 });
@@ -87,7 +87,7 @@ router.get('/err/manual/auth', (req, res) => {
 
 	// pretend to read a token file
 	// again, note the return statement
-	return fs.readFileAsync(`${__dirname}/../static/index.html`)
+	return fs.readFileAsync(`${ __dirname }/../static/index.html`)
 	// and pretend to compare it with what the user sent
 		.then((token) => {
 			if (!req.params || req.params.token !== token) {

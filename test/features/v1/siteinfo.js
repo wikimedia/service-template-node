@@ -14,7 +14,7 @@ describe('wiki site info', function () {
 	before(() => {
 		return server.start()
 			.then(() => {
-				uri =  `${server.config.uri}en.wikipedia.org/v1/siteinfo/`;
+				uri =  `${ server.config.uri }en.wikipedia.org/v1/siteinfo/`;
 			});
 	});
 
@@ -36,7 +36,7 @@ describe('wiki site info', function () {
 
 	it('should get the mainpage setting of enwiki', () => {
 		return preq.get({
-			uri: `${uri}mainpage`
+			uri: `${ uri }mainpage`
 		}).then((res) => {
 			// check the status
 			assert.status(res, 200);
@@ -50,10 +50,10 @@ describe('wiki site info', function () {
 
 	it('should fail to get a non-existent setting of enwiki', () => {
 		return preq.get({
-			uri: `${uri}dummy_wiki_setting`
+			uri: `${ uri }dummy_wiki_setting`
 		}).then((res) => {
 			// if we are here, no error was thrown, not good
-			throw new Error(`Expected an error to be thrown, got status: ${res.status}`);
+			throw new Error(`Expected an error to be thrown, got status: ${ res.status }`);
 		}, (err) => {
 			// inspect the status
 			assert.deepEqual(err.status, 404);
@@ -62,10 +62,10 @@ describe('wiki site info', function () {
 
 	it('should fail to get info from a non-existent wiki', () => {
 		return preq.get({
-			uri: `${server.config.uri}non.existent.wiki/v1/siteinfo/`
+			uri: `${ server.config.uri }non.existent.wiki/v1/siteinfo/`
 		}).then((res) => {
 			// if we are here, no error was thrown, not good
-			throw new Error(`Expected an error to be thrown, got status: ${res.status}`);
+			throw new Error(`Expected an error to be thrown, got status: ${ res.status }`);
 		}, (err) => {
 			// inspect the status
 			assert.deepEqual(err.status, 504);
