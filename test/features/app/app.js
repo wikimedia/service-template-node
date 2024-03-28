@@ -16,7 +16,7 @@ describe('express app', function () {
 
 	it('should get robots.txt', () => {
 		return preq.get({
-			uri: `${server.config.uri}robots.txt`
+			uri: `${ server.config.uri }robots.txt`
 		}).then((res) => {
 			assert.deepEqual(res.status, 200);
 			assert.deepEqual(res.body, 'User-agent: *\nDisallow: /\n');
@@ -28,7 +28,7 @@ describe('express app', function () {
 			return true;
 		}
 		return preq.get({
-			uri: `${server.config.uri}robots.txt`
+			uri: `${ server.config.uri }robots.txt`
 		}).then((res) => {
 			assert.deepEqual(res.status, 200);
 			assert.deepEqual(res.headers['access-control-allow-origin'], '*');
@@ -42,7 +42,7 @@ describe('express app', function () {
 			return true;
 		}
 		return preq.get({
-			uri: `${server.config.uri}robots.txt`
+			uri: `${ server.config.uri }robots.txt`
 		}).then((res) => {
 			assert.deepEqual(res.status, 200);
 			assert.deepEqual(res.headers['x-xss-protection'], '1; mode=block');
@@ -54,7 +54,7 @@ describe('express app', function () {
 
 	it('should get static content gzipped', () => {
 		return preq.get({
-			uri: `${server.config.uri}static/index.html`,
+			uri: `${ server.config.uri }static/index.html`,
 			headers: {
 				'accept-encoding': 'gzip, deflate'
 			}
@@ -68,7 +68,7 @@ describe('express app', function () {
 
 	it('should get static content uncompressed', () => {
 		return preq.get({
-			uri: `${server.config.uri}static/index.html`,
+			uri: `${ server.config.uri }static/index.html`,
 			headers: {
 				'accept-encoding': ''
 			}

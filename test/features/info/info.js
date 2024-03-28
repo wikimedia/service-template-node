@@ -15,7 +15,7 @@ describe('service information', function () {
 	before(() => {
 		return server.start()
 			.then(() => {
-				infoUri = `${server.config.uri}_info/`;
+				infoUri = `${ server.config.uri }_info/`;
 			});
 	});
 
@@ -33,7 +33,7 @@ describe('service information', function () {
 			assert.status(res, 200);
 			// finally, check the body has the specified field
 			assert.notDeepEqual(res.body, undefined, 'No body returned!');
-			assert.notDeepEqual(res.body[fieldName], undefined, `No ${fieldName} field returned!`);
+			assert.notDeepEqual(res.body[fieldName], undefined, `No ${ fieldName } field returned!`);
 		});
 	}
 
@@ -47,7 +47,7 @@ describe('service information', function () {
 
 	it('should redirect to the service home page', () => {
 		return preq.get({
-			uri: `${infoUri}home`,
+			uri: `${ infoUri }home`,
 			followRedirect: false
 		}).then((res) => {
 			// check the status
@@ -74,7 +74,7 @@ describe('service information', function () {
 
 	it('should fail to get the service info for invalid endpoint', () => {
 		return assert.fails(
-			preq.get({ uri: `${infoUri}zzz` }),
+			preq.get({ uri: `${ infoUri }zzz` }),
 			(res) => {
 				assert.deepEqual(res.status, 404);
 			}
