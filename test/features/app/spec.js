@@ -21,24 +21,24 @@ function validateExamples(pathStr, defParams, mSpec) {
 			uri.expand(defParams);
 			return true;
 		} catch (e) {
-			throw new Error(`Missing parameter for route ${pathStr} : ${e.message}`);
+			throw new Error(`Missing parameter for route ${ pathStr } : ${ e.message }`);
 		}
 	}
 
 	if (!Array.isArray(mSpec)) {
-		throw new Error(`Route ${pathStr} : x-amples must be an array!`);
+		throw new Error(`Route ${ pathStr } : x-amples must be an array!`);
 	}
 
 	mSpec.forEach((ex, idx) => {
 		if (!ex.title) {
-			throw new Error(`Route ${pathStr}, example ${idx}: title missing!`);
+			throw new Error(`Route ${ pathStr }, example ${ idx }: title missing!`);
 		}
 		ex.request = ex.request || {};
 		try {
 			uri.expand(Object.assign({}, defParams, ex.request.params || {}));
 		} catch (e) {
 			throw new Error(
-				`Route ${pathStr}, example ${idx} (${ex.title}): missing parameter: ${e.message}`
+				`Route ${ pathStr }, example ${ idx } (${ ex.title }): missing parameter: ${ e.message }`
 			);
 		}
 	});
@@ -123,8 +123,8 @@ function cmp(result, expected, errMsg) {
 		Object.keys(expected).forEach((key) => {
 			const val = expected[key];
 			assert.deepEqual({}.hasOwnProperty.call(result, key), true,
-				`Body field ${key} not found in response!`);
-			cmp(result[key], val, `${key} body field mismatch!`);
+				`Body field ${ key } not found in response!`);
+			cmp(result[key], val, `${ key } body field mismatch!`);
 		});
 		return true;
 	} else if (expected.constructor === Array) {
@@ -151,6 +151,7 @@ function cmp(result, expected, errMsg) {
 	}
 
 	if (expected.length > 1 && expected[0] === '/' && expected[expected.length - 1] === '/') {
+	// eslint-disable-next-line security/detect-non-literal-regexp
 		if (new RegExp(expected.slice(1, -1)).test(result)) {
 			return true;
 		}
@@ -166,7 +167,7 @@ function cmp(result, expected, errMsg) {
 }
 
 function validateArray(val, resVal, key) {
-	assert.deepEqual(Array.isArray(resVal), true, `Body field ${key} is not an array!`);
+	assert.deepEqual(Array.isArray(resVal), true, `Body field ${ key } is not an array!`);
 	let arrVal;
 	if (val.length === 1) {
 		// special case: we have specified only one item in the expected body,
@@ -174,7 +175,7 @@ function validateArray(val, resVal, key) {
 		// fill the expected array with as many items as the returned one
 		if (resVal.length < 1) {
 			throw new assert.AssertionError({
-				message: `Expected more then one element in the field: ${key}`
+				message: `Expected more then one element in the field: ${ key }`
 			});
 		}
 		arrVal = [];
@@ -185,8 +186,8 @@ function validateArray(val, resVal, key) {
 		arrVal = val;
 	}
 	assert.deepEqual(arrVal.length, resVal.length,
-		`Different size of array for field ${key}, expected ${arrVal.length
-		} actual ${resVal.length}`);
+		`Different size of array for field ${ key }, expected ${ arrVal.length
+		} actual ${ resVal.length }`);
 	arrVal.forEach((item, index) => {
 		validateBody(resVal[index], item);
 	});
@@ -216,7 +217,7 @@ function validateBody(resBody, expBody) {
 			} else if (val.constructor === Array) {
 				validateArray(val, resBody[key], key);
 			} else {
-				cmp(resBody[key], val, `${key} body field mismatch!`);
+				cmp(resBody[key], val, `${ key } body field mismatch!`);
 			}
 		});
 	} else if (Array.isArray(expBody)) {
@@ -238,7 +239,7 @@ function validateTestResponse(testCase, res) {
 		const val = expRes.headers[key];
 		// eslint-disable-next-line
         assert.deepEqual(res.headers.hasOwnProperty(key), true, `Header ${key} not found in response!`);
-		cmp(res.headers[key], val, `${key} header mismatch!`);
+		cmp(res.headers[key], val, `${ key } header mismatch!`);
 	});
 
 	validateBody(res.body || '', expRes.body);
@@ -249,11 +250,12 @@ describe('Swagger spec', function () {
 	this.timeout(20000);
 
 	before(() => server.start());
+
 	after(() => server.stop());
 
 	it('get the spec', () => {
 		baseUrl = server.config.uri;
-		return preq.get(`${baseUrl}?spec`)
+		return preq.get(`${ baseUrl }?spec`)
 			.then((res) => {
 				assert.status(200);
 				assert.contentType(res, 'application/json');
@@ -271,9 +273,9 @@ describe('Swagger spec', function () {
 
 					constructTests(spec).forEach((testCase) => {
 						// eslint-disable-next-line mocha/handle-done-callback, mocha/no-nested-tests
-						it(testCase.title, function (done) {
-							// eslint-disable-next-line mocha/no-return-and-callback
-							return preq(testCase.request)
+						it(testCase.title, (done) => {
+
+							preq(testCase.request)
 								.then((res) => {
 									assert.status(res, testCase.response.status);
 									validateTestResponse(testCase, res);
@@ -288,17 +290,15 @@ describe('Swagger spec', function () {
 			});
 	});
 
-	it('should expose valid OpenAPI spec', () => {
-		return preq.get({ uri: `${server.config.uri}?spec` })
-			.then((res) =>  {
-				assert.deepEqual({ errors: [] }, validator.validate(res.body), 'Spec must have no validation errors');
-			});
-	});
+	it('should expose valid OpenAPI spec', () => preq.get({ uri: `${ server.config.uri }?spec` })
+		.then((res) =>  {
+			assert.deepEqual({ errors: [] }, validator.validate(res.body), 'Spec must have no validation errors');
+		}));
 
 	it('spec validation', () => {
 		// check the high-level attributes
 		[ 'info', 'openapi', 'paths' ].forEach((prop) => {
-			assert.deepEqual(!!spec[prop], true, `No ${prop} field present!`);
+			assert.deepEqual(!!spec[prop], true, `No ${ prop } field present!`);
 		});
 		// no paths - no love
 		assert.deepEqual(!!Object.keys(spec.paths), true, 'No paths given in the spec!');
@@ -306,7 +306,7 @@ describe('Swagger spec', function () {
 		Object.keys(spec.paths).forEach((pathStr) => {
 			assert.deepEqual(!!pathStr, true, 'A path cannot have a length of zero!');
 			const path = spec.paths[pathStr];
-			assert.deepEqual(!!Object.keys(path), true, `No methods defined for path: ${pathStr}`);
+			assert.deepEqual(!!Object.keys(path), true, `No methods defined for path: ${ pathStr }`);
 			Object.keys(path).forEach((method) => {
 				const mSpec = path[method];
 				if ({}.hasOwnProperty.call(mSpec, 'x-monitor') && !mSpec['x-monitor']) {

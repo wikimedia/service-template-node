@@ -10,82 +10,70 @@ describe('errors', function () {
 	let uri = null;
 	const server = new Server();
 
-	before(() => {
-		return server.start()
-			.then(() => {
-				uri = `${server.config.uri}ex/err/`;
-			});
-	});
+	before(() => server.start()
+		.then(() => {
+			uri = `${ server.config.uri }ex/err/`;
+		}));
 
 	after(() => server.stop());
 
-	it('array creation error', () => {
-		return preq.get({
-			uri: `${uri}array`
-		}).then((res) => {
-			// if we are here, no error was thrown, not good
-			throw new Error(`Expected an error to be thrown, got status: ${res.status}`);
-		}, (err) => {
-			// inspect the status
-			assert.deepEqual(err.status, 500);
-			// check the error title
-			assert.deepEqual(err.body.title, 'RangeError');
-		});
-	});
+	it('array creation error', () => preq.get({
+		uri: `${ uri }array`
+	}).then((res) => {
+		// if we are here, no error was thrown, not good
+		throw new Error(`Expected an error to be thrown, got status: ${ res.status }`);
+	}, (err) => {
+		// inspect the status
+		assert.deepEqual(err.status, 500);
+		// check the error title
+		assert.deepEqual(err.body.title, 'RangeError');
+	}));
 
-	it('file read error', () => {
-		return preq.get({
-			uri: `${uri}file`
-		}).then((res) => {
-			// if we are here, no error was thrown, not good
-			throw new Error(`Expected an error to be thrown, got status: ${res.status}`);
-		}, (err) => {
-			// inspect the status
-			assert.deepEqual(err.status, 500);
-			// check the error title
-			assert.deepEqual(err.body.title, 'Error');
-		});
-	});
+	it('file read error', () => preq.get({
+		uri: `${ uri }file`
+	}).then((res) => {
+		// if we are here, no error was thrown, not good
+		throw new Error(`Expected an error to be thrown, got status: ${ res.status }`);
+	}, (err) => {
+		// inspect the status
+		assert.deepEqual(err.status, 500);
+		// check the error title
+		assert.deepEqual(err.body.title, 'Error');
+	}));
 
-	it('constraint check error', () => {
-		return preq.get({
-			uri: `${uri}manual/error`
-		}).then((res) => {
-			// if we are here, no error was thrown, not good
-			throw new Error(`Expected an error to be thrown, got status: ${res.status}`);
-		}, (err) => {
-			// inspect the status
-			assert.deepEqual(err.status, 500);
-			// check the error title
-			assert.deepEqual(err.body.title, 'Error');
-		});
-	});
+	it('constraint check error', () => preq.get({
+		uri: `${ uri }manual/error`
+	}).then((res) => {
+		// if we are here, no error was thrown, not good
+		throw new Error(`Expected an error to be thrown, got status: ${ res.status }`);
+	}, (err) => {
+		// inspect the status
+		assert.deepEqual(err.status, 500);
+		// check the error title
+		assert.deepEqual(err.body.title, 'Error');
+	}));
 
-	it('access denied error', () => {
-		return preq.get({
-			uri: `${uri}manual/deny`
-		}).then((res) => {
-			// if we are here, no error was thrown, not good
-			throw new Error(`Expected an error to be thrown, got status: ${res.status}`);
-		}, (err) => {
-			// inspect the status
-			assert.deepEqual(err.status, 403);
-			// check the error title
-			assert.deepEqual(err.body.type, 'access_denied');
-		});
-	});
+	it('access denied error', () => preq.get({
+		uri: `${ uri }manual/deny`
+	}).then((res) => {
+		// if we are here, no error was thrown, not good
+		throw new Error(`Expected an error to be thrown, got status: ${ res.status }`);
+	}, (err) => {
+		// inspect the status
+		assert.deepEqual(err.status, 403);
+		// check the error title
+		assert.deepEqual(err.body.type, 'access_denied');
+	}));
 
-	it('authorisation error', () => {
-		return preq.get({
-			uri: `${uri}manual/auth`
-		}).then((res) => {
-			// if we are here, no error was thrown, not good
-			throw new Error(`Expected an error to be thrown, got status: ${res.status}`);
-		}, (err) => {
-			// inspect the status
-			assert.deepEqual(err.status, 401);
-			// check the error title
-			assert.deepEqual(err.body.type, 'unauthorized');
-		});
-	});
+	it('authorisation error', () => preq.get({
+		uri: `${ uri }manual/auth`
+	}).then((res) => {
+		// if we are here, no error was thrown, not good
+		throw new Error(`Expected an error to be thrown, got status: ${ res.status }`);
+	}, (err) => {
+		// inspect the status
+		assert.deepEqual(err.status, 401);
+		// check the error title
+		assert.deepEqual(err.body.type, 'unauthorized');
+	}));
 });

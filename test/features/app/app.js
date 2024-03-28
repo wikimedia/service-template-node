@@ -14,21 +14,19 @@ describe('express app', function () {
 
 	after(() => server.stop());
 
-	it('should get robots.txt', () => {
-		return preq.get({
-			uri: `${server.config.uri}robots.txt`
-		}).then((res) => {
-			assert.deepEqual(res.status, 200);
-			assert.deepEqual(res.body, 'User-agent: *\nDisallow: /\n');
-		});
-	});
+	it('should get robots.txt', () => preq.get({
+		uri: `${ server.config.uri }robots.txt`
+	}).then((res) => {
+		assert.deepEqual(res.status, 200);
+		assert.deepEqual(res.body, 'User-agent: *\nDisallow: /\n');
+	}));
 
 	it('should set CORS headers', () => {
 		if (server.config.service.conf.cors === false) {
 			return true;
 		}
 		return preq.get({
-			uri: `${server.config.uri}robots.txt`
+			uri: `${ server.config.uri }robots.txt`
 		}).then((res) => {
 			assert.deepEqual(res.status, 200);
 			assert.deepEqual(res.headers['access-control-allow-origin'], '*');
@@ -42,7 +40,7 @@ describe('express app', function () {
 			return true;
 		}
 		return preq.get({
-			uri: `${server.config.uri}robots.txt`
+			uri: `${ server.config.uri }robots.txt`
 		}).then((res) => {
 			assert.deepEqual(res.status, 200);
 			assert.deepEqual(res.headers['x-xss-protection'], '1; mode=block');
@@ -52,30 +50,26 @@ describe('express app', function () {
 		});
 	});
 
-	it('should get static content gzipped', () => {
-		return preq.get({
-			uri: `${server.config.uri}static/index.html`,
-			headers: {
-				'accept-encoding': 'gzip, deflate'
-			}
-		}).then((res) => {
-			assert.deepEqual(res.status, 200);
-			// if there is no content-length, the reponse was gzipped
-			assert.deepEqual(res.headers['content-length'], undefined,
-				'Did not expect the content-length header!');
-		});
-	});
+	it('should get static content gzipped', () => preq.get({
+		uri: `${ server.config.uri }static/index.html`,
+		headers: {
+			'accept-encoding': 'gzip, deflate'
+		}
+	}).then((res) => {
+		assert.deepEqual(res.status, 200);
+		// if there is no content-length, the reponse was gzipped
+		assert.deepEqual(res.headers['content-length'], undefined,
+			'Did not expect the content-length header!');
+	}));
 
-	it('should get static content uncompressed', () => {
-		return preq.get({
-			uri: `${server.config.uri}static/index.html`,
-			headers: {
-				'accept-encoding': ''
-			}
-		}).then((res) => {
-			const contentEncoding = res.headers['content-encoding'];
-			assert.deepEqual(res.status, 200);
-			assert.deepEqual(contentEncoding, undefined, 'Did not expect gzipped contents!');
-		});
-	});
+	it('should get static content uncompressed', () => preq.get({
+		uri: `${ server.config.uri }static/index.html`,
+		headers: {
+			'accept-encoding': ''
+		}
+	}).then((res) => {
+		const contentEncoding = res.headers['content-encoding'];
+		assert.deepEqual(res.status, 200);
+		assert.deepEqual(contentEncoding, undefined, 'Did not expect gzipped contents!');
+	}));
 });

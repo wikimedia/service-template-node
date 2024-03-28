@@ -51,7 +51,7 @@ router.get('/siteinfo/:prop?', (req, res) => {
 						status: 404,
 						type: 'not_found',
 						title: 'No such property',
-						detail: `Property ${req.params.prop} not found in MW API response!`
+						detail: `Property ${ req.params.prop } not found in MW API response!`
 					});
 				}
 				// ok, return that prop
@@ -81,12 +81,11 @@ router.get('/siteinfo/:prop?', (req, res) => {
 function getBody(req) {
 
 	// get the page
-	return apiUtil.restApiGet(req, `page/html/${req.params.title}`)
+	return apiUtil.restApiGet(req, `page/html/${ req.params.title }`)
 		.then((callRes) => {
 			// and then load and parse the page
-			return BBPromise.resolve(domino.createDocument(callRes.body));
+			BBPromise.resolve(domino.createDocument(callRes.body));
 		});
-
 }
 
 /**
@@ -94,14 +93,12 @@ function getBody(req) {
  * Gets the body of a given page.
  */
 router.get('/page/:title', (req, res) => {
-
 	// get the page's HTML directly
-	return getBody(req)
+	getBody(req)
 	// and then return it
 		.then((doc) => {
 			res.status(200).type('html').end(doc.body.innerHTML);
 		});
-
 });
 
 /**
@@ -111,7 +108,7 @@ router.get('/page/:title', (req, res) => {
 router.get('/page/:title/lead', (req, res) => {
 
 	// get the page's HTML directly
-	return getBody(req)
+	getBody(req)
 	// and then find the leading section and return it
 		.then((doc) => {
 			let leadSec = '';
@@ -123,21 +120,16 @@ router.get('/page/:title/lead', (req, res) => {
 				if (!/^\s*$/.test(child.innerHTML)) {
 					// that must be our leading section
 					// so enclose it in a <div>
-					leadSec = `<div id="lead_section">${child.innerHTML}</div>`;
+					leadSec = `<div id="lead_section">${ child.innerHTML }</div>`;
 					break;
 				}
 			}
 			res.status(200).type('html').end(leadSec);
 		});
-
 });
 
-module.exports = (appObj) => {
-
-	return {
-		path: '/',
-		api_version: 1,
-		router
-	};
-
-};
+module.exports = (appObj) => ({
+	path: '/',
+	api_version: 1,
+	router
+});
