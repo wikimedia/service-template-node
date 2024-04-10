@@ -40,7 +40,7 @@
 		"http-shutdown": "^1.2.1",
 		"js-yaml": "^3.13.1",
 		"preq": "^0.5.9",
-		"service-runner": "^3.1.0",
+		"service-runner": "^5.0.0",
 		"swagger-router": "^0.7.4",
 		"swagger-ui-dist": "^4.10.3",
 		"uuid": "^3.3.2"
