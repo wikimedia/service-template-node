@@ -4,17 +4,12 @@
 		"wikimedia/jsdoc"
 	],
 	"rules": {
-		"array-bracket-spacing": "off",
 		"camelcase": [
 			"error",
 			{
 				"properties": "never"
 			}
 		],
-		"computed-property-spacing": "off",
-		"no-multi-spaces": "off",
-		"no-shadow": "off",
-		"no-undefined": "off",
 		"no-underscore-dangle": "off",
 		"no-unused-vars": [
 			"error",
@@ -22,10 +17,7 @@
 				"args": "none"
 			}
 		],
-		"space-in-parens": ["error", "never"],
-		"jsdoc/no-undefined-types": "off",
-		"es-x/no-symbol-prototype-description": "off",
-		"es-x/no-hashbang": "off"
+		"jsdoc/no-undefined-types": "off"
 	},
 	"overrides": [
 		{
