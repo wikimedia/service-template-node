@@ -1,6 +1,6 @@
 # service-template-node
 
-Template for creating MediaWiki Services in Node.js
+Template for creating MediaWiki Services in Node.js. This template is no longer maintained and no longer represents best practices for MediaWiki Services in Node.js
 
 ## Getting Started
 
