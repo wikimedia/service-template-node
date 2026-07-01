@@ -36,15 +36,12 @@ router.get( '/err/array', ( req, res ) => {
  * read a non-existent file, which will produce an error,
  * automatically handled by the template.
  */
-router.get( '/err/file', ( req, res ) => {
-	// read the file
-	fs.readFileAsync( '../mushrooms.txt' )
-		// … and then send it back to the caller
-		.then( ( text ) => {
-			// note that this point is never reached
-			res.send( text );
-		} );
-} );
+router.get( '/err/file', ( req, res ) => fs.readFileAsync( '../mushrooms.txt' )
+	// … and then send it back to the caller
+	.then( ( text ) => {
+		// note that this point is never reached
+		res.send( text );
+	} ) );
 
 /**
  * GET /err/manual/error
@@ -77,23 +74,19 @@ router.get( '/err/manual/deny', ( req, res ) => {
 /**
  * GET /err/manual/auth
  */
-router.get( '/err/manual/auth', ( req, res ) => {
-
-	// pretend to read a token file
-	fs.readFileAsync( `${ __dirname }/../static/index.html` )
+router.get( '/err/manual/auth', ( req, res ) => fs.readFileAsync( `${ __dirname }/../package.json` )
 	// and pretend to compare it with what the user sent
-		.then( ( token ) => {
-			if ( !req.params || req.params.token !== token ) {
-				// nope, not authorised to be here, sorry
-				throw new HTTPError( {
-					status: 401,
-					type: 'unauthorized',
-					title: 'Unauthorized',
-					detail: 'You are not authorized to fetch this endpoint!'
-				} );
-			}
-		} );
-} );
+	.then( ( token ) => {
+		if ( !req.params || req.params.token !== token ) {
+			// nope, not authorised to be here, sorry
+			throw new HTTPError( {
+				status: 401,
+				type: 'unauthorized',
+				title: 'Unauthorized',
+				detail: 'You are not authorized to fetch this endpoint!'
+			} );
+		}
+	} ) );
 
 /*
  *  REQUEST EXAMPLES

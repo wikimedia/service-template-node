@@ -50,8 +50,8 @@ describe( 'express app', function () {
 		} );
 	} );
 
-	it( 'should get static content gzipped', () => preq.get( {
-		uri: `${ server.config.uri }static/index.html`,
+	it( 'should get spec gzipped', () => preq.get( {
+		uri: `${ server.config.uri }?spec`,
 		headers: {
 			'accept-encoding': 'gzip, deflate'
 		}
@@ -62,8 +62,8 @@ describe( 'express app', function () {
 			'Did not expect the content-length header!' );
 	} ) );
 
-	it( 'should get static content uncompressed', () => preq.get( {
-		uri: `${ server.config.uri }static/index.html`,
+	it( 'should get spec uncompressed', () => preq.get( {
+		uri: `${ server.config.uri }?spec`,
 		headers: {
 			'accept-encoding': ''
 		}

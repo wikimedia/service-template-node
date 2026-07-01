@@ -228,8 +228,4 @@ function createServer( app ) {
  */
 module.exports = ( options ) => initApp( options )
 	.then( ( app ) => loadRoutes( app, `${ __dirname }/routes` ) )
-	.then( ( app ) => {
-		// serve static files from static/
-		app.use( '/static', express.static( `${ __dirname }/static` ) );
-		return app;
-	} ).then( createServer );
+	.then( createServer );
